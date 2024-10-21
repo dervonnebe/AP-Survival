@@ -1,0 +1,20 @@
+name: AP-Survival
+version: '1.0'
+main: de.dervonnebe.aps.APSurvival
+api-version: '1.21'
+author: dervonnebe
+description: Watch out Website
+website: https://dervonnebe.de/ap/survival
+commands:
+    apsurvival:
+        description: Main command for AP-Survival
+        usage: /apsurvival
+        aliases: [aps]
+
+permissions:
+    apsurvival.admin:
+        description: Permission for all admin commands
+        default: op
+    apsurvival.user:
+        description: Permission for all user commands
+        default: true
