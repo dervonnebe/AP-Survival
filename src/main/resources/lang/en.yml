@@ -2,9 +2,7 @@
 # if you want to use a new line, use \n
 # if you want to use a & symbol, use \&
 
-no-perm: "&cYou do not have permission to do that."
-
-gamemode-change: "&7Your gamemode has been changed to &f&l%GAMEMODE%§7."
+no-perm: "&cYou do not have permission to do that. §8(§7%perm%§8)"
 
 join-leaves:
   join: "§a%player% §7has joined the server."
@@ -14,3 +12,14 @@ join-leaves:
     subtitle: "§7Have fun playing!"
     actionbar: "§7Welcome to the server, §a%player%§7!"
     chat: "§7Welcome to the server, §a%player%§7!"
+command:
+  # Command error messages
+  player-not-found: "Player not found!"
+  only-players: "This command can only be executed by players."
+  invalid: "Invalid command! Please use %command%."
+  # Command messages
+  gamemode:
+    current-gamemode: "Your current gamemode is: %gamemode%"
+    change: "Your gamemode has been changed to %gamemode%."
+    change-other: "%target% has been changed to gamemode %gamemode%."
+    invalid-gamemode: "Invalid gamemode! Please use a valid gamemode."

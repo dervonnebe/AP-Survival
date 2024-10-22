@@ -57,7 +57,7 @@ public class Messages {
         return message;
     }
 
-    public String getMessages(String key) {
+    public String getMessage(String key) {
         return getMessage(key, language);
     }
 }

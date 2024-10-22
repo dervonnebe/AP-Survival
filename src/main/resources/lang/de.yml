@@ -1,3 +1,9 @@
+# Nutze & oder § für Farben
+# Wenn du ein & Symbol benutzen möchtest, benutze \&
+# Wenn du eine neue Zeile einfügen möchtest, benutze \n
+
+no-perm: "&cDu hast keine Berechtigung, das zu tun. §8(§7%perm%§8)"
+
 join-leaves:
   join: "§a%player% §7hat den Server betreten."
   leave: "§c%player% §7hat den Server verlassen."
@@ -6,3 +12,14 @@ join-leaves:
     subtitle: "§7Viel Spaß beim Spielen!"
     actionbar: "§7Willkommen auf dem Server, §a%player%§7!"
     chat: "§7Willkommen auf dem Server, §a%player%§7!"
+command:
+  # Command Fehlermeldungen
+  player-not-found: "Spieler nicht gefunden!"
+  only-players: "Dieser Befehl kann nur von Spielern ausgeführt werden."
+  invalid: "Ungültiger Befehl! Bitte benutze %command%."
+  # Command Nachrichten
+  gamemode:
+    current-gamemode: "Ihr aktueller Spielmodus ist: %gamemode%"
+    change: "Ihr Spielmodus wurde auf %gamemode% geändert."
+    change-other: "%target% wurde auf den Spielmodus %gamemode% geändert."
+    invalid-gamemode: "Ungültiger Spielmodus! Bitte benutze einen gültigen Gamemode."

@@ -10,6 +10,11 @@ commands:
         description: Main command for AP-Survival
         usage: /apsurvival
         aliases: [aps]
+    gamemode:
+        description: Setze den Gamemode.
+        usage: /<command> <0,1,2,3,a,s,c,sp,survival,adventure,creative,spectator> [spieler]
+        aliases:
+            - gm
 
 permissions:
     apsurvival.admin:

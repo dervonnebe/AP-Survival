@@ -1,6 +1,7 @@
 package de.dervonnebe.aps;
 
 import de.dervonnebe.aps.commands.APSurvivalCommand;
+import de.dervonnebe.aps.commands.GamemodeCommand;
 import de.dervonnebe.aps.events.*;
 import de.dervonnebe.aps.utils.ConfigManager;
 import de.dervonnebe.aps.utils.Messages;
@@ -48,6 +49,10 @@ public final class APSurvival extends JavaPlugin {
         APSurvivalCommand apSurvivalCommand = new APSurvivalCommand(this);
         getCommand("apsurvival").setExecutor(apSurvivalCommand);
         getCommand("apsurvival").setTabCompleter(apSurvivalCommand);
+
+        GamemodeCommand gamemodeCommand = new GamemodeCommand(this);
+        getCommand("gamemode").setExecutor(gamemodeCommand);
+        getCommand("gamemode").setTabCompleter(gamemodeCommand);
 
         log("Commands registered!");
     }
