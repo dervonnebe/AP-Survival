@@ -19,10 +19,20 @@ join-leaves:
   join:
     custom: true #If you want to use a custom join message, set this to true
     no-message: false #If you want to disable the join message, set this to true
+    particle: true
+    welcome:
+      title: true
+      subtitle: true
+      title-fade-in: 1 # Time in seconds
+      title-stay: 1 # Time in seconds
+      title-fade-out: 3 # Time in seconds
+      actionbar: true
+      chat: true
+      sound: ENTITY_PLAYER_LEVELUP
   leave:
     custom: true
     no-message: false
-
+    particle: true
 
 
 # Do not change the following settings unless you know what you are doing

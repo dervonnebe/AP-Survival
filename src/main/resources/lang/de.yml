@@ -1,3 +1,8 @@
 join-leaves:
   join: "§a%player% §7hat den Server betreten."
   leave: "§c%player% §7hat den Server verlassen."
+  welcome:
+    title: "§aWillkommen auf dem Server!"
+    subtitle: "§7Viel Spaß beim Spielen!"
+    actionbar: "§7Willkommen auf dem Server, §a%player%§7!"
+    chat: "§7Willkommen auf dem Server, §a%player%§7!"

@@ -1,3 +1,7 @@
+# use § or & for colors
+# if you want to use a new line, use \n
+# if you want to use a & symbol, use \&
+
 no-perm: "&cYou do not have permission to do that."
 
 gamemode-change: "&7Your gamemode has been changed to &f&l%GAMEMODE%§7."
@@ -5,3 +9,8 @@ gamemode-change: "&7Your gamemode has been changed to &f&l%GAMEMODE%§7."
 join-leaves:
   join: "§a%player% §7has joined the server."
   leave: "§c%player% §7has left the server."
+  welcome:
+    title: "§aWelcome to the server!"
+    subtitle: "§7Have fun playing!"
+    actionbar: "§7Welcome to the server, §a%player%§7!"
+    chat: "§7Welcome to the server, §a%player%§7!"

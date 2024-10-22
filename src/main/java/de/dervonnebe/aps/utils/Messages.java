@@ -52,6 +52,8 @@ public class Messages {
             return "§4Message not Found §8(§7" + key + "§8)";
         }
 
+        message = message.replaceAll("(?<!\\\\)&", "§").replaceAll("\\\\&", "&");
+
         return message;
     }
 
