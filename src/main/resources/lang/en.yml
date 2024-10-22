@@ -1,0 +1,7 @@
+no-perm: "&cYou do not have permission to do that."
+
+gamemode-change: "&7Your gamemode has been changed to &f&l%GAMEMODE%§7."
+
+join-leaves:
+  join: "§a%player% §7has joined the server."
+  leave: "§c%player% §7has left the server."

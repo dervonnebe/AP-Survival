@@ -1,0 +1,3 @@
+join-leaves:
+  join: "§a%player% §7hat den Server betreten."
+  leave: "§c%player% §7hat den Server verlassen."

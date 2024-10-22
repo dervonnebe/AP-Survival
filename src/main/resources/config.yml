@@ -1,0 +1,29 @@
+#          :::     :::::::::   ::::::::
+#       :+: :+:   :+:    :+: :+:    :+:
+#      +:+   +:+  +:+    +:+ +:+
+#    +#++:++#++: +#++:++#+  +#++:++#++
+#   +#+     +#+ +#+               +#+
+#  #+#     #+# #+#        #+#    #+#
+# ###     ### ###         ########
+# Made by AP - dervonnebe - Jack F. - 2024
+# This is the config file for AP-Survival
+# You can change the settings to your liking
+# If you have any questions, feel free to ask in the Discord
+# https://discord.gg/qqrkVFU2Fw
+
+prefix: "§4§lAPS §8▶ §7"
+lang: "en" # Language file to use
+per-player-language: false # If you want to use a per-player language, set this to true
+
+join-leaves:
+  join:
+    custom: true #If you want to use a custom join message, set this to true
+    no-message: false #If you want to disable the join message, set this to true
+  leave:
+    custom: true
+    no-message: false
+
+
+
+# Do not change the following settings unless you know what you are doing
+file-version: 1.0-BETA
