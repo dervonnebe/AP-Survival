@@ -20,11 +20,42 @@ commands:
         usage: /<command> <spieler,location>
         aliases:
             - tp
+    msg:
+        description: Sende eine private Nachricht.
+        usage: /<command> <spieler> <nachricht>
+        aliases:
+            - m
+            - tell
+            - whisper
+            - w
+    reply:
+        description: Antworte auf eine private Nachricht.
+        usage: /<command> <nachricht>
+        aliases:
+            - r
 
 permissions:
-    apsurvival.admin:
+    aps.admin:
         description: Permission for all admin commands
         default: op
-    apsurvival.user:
+    aps.user:
         description: Permission for all user commands
         default: true
+    aps.command.reply:
+        description: Permission to reply to private messages
+        default: true
+    aps.command.msg:
+        description: Permission to send private messages
+        default: true
+    aps.command.msg.receive:
+        description: Permission to receive private messages
+        default: true
+    aps.command.msg.send:
+        description: Permission to send private messages
+        default: true
+    aps.command.teleport:
+        description: Permission to teleport to players
+        default: op
+    aps.command.gamemode:
+        description: Permission to change the gamemode
+        default: op

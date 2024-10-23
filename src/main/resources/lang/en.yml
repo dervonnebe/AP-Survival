@@ -23,3 +23,9 @@ command:
     change: "Your gamemode has been changed to %gamemode%."
     change-other: "%target% has been changed to gamemode %gamemode%."
     invalid-gamemode: "Invalid gamemode! Please use a valid gamemode."
+  msg:
+    no-reply: "You have no one to reply to."
+    cannot-receive: "&cThis player cannot receive messages."
+    format:
+      sender: "§7[You -> §f%target%§7]: §f%message%"
+      receiver: "§7[§f%sender%§7 -> You]: §f%message%"

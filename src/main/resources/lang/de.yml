@@ -23,3 +23,10 @@ command:
     change: "Ihr Spielmodus wurde auf %gamemode% geändert."
     change-other: "%target% wurde auf den Spielmodus %gamemode% geändert."
     invalid-gamemode: "Ungültiger Spielmodus! Bitte benutze einen gültigen Gamemode."
+  msg:
+    no-reply: "Du hast niemanden, an den du antworten kannst."
+    cannot-receive: "&cDieser Spieler kann keine Nachrichten empfangen."
+    format:
+      sender: "§7[Du -> §f%target%§7]: §f%message%"
+      receiver: "§7[§f%sender%§7 -> Dir]: §f%message%"
+

@@ -2,6 +2,7 @@ package de.dervonnebe.aps;
 
 import de.dervonnebe.aps.commands.APSurvivalCommand;
 import de.dervonnebe.aps.commands.GamemodeCommand;
+import de.dervonnebe.aps.commands.MSGCommand;
 import de.dervonnebe.aps.commands.TeleportCommand;
 import de.dervonnebe.aps.events.*;
 import de.dervonnebe.aps.utils.ConfigManager;
@@ -58,6 +59,12 @@ public final class APSurvival extends JavaPlugin {
         TeleportCommand teleportCommand = new TeleportCommand(this);
         getCommand("teleport").setExecutor(teleportCommand);
         getCommand("teleport").setTabCompleter(teleportCommand);
+
+        MSGCommand msgCommand = new MSGCommand(this);
+        getCommand("msg").setExecutor(msgCommand);
+        getCommand("msg").setTabCompleter(msgCommand);
+        getCommand("reply").setExecutor(msgCommand);
+        getCommand("r").setExecutor(msgCommand);
 
         log("Commands registered!");
     }
