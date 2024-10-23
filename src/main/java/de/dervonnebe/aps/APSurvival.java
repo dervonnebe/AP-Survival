@@ -4,7 +4,7 @@ import de.dervonnebe.aps.commands.APSurvivalCommand;
 import de.dervonnebe.aps.commands.GamemodeCommand;
 import de.dervonnebe.aps.commands.MSGCommand;
 import de.dervonnebe.aps.commands.TeleportCommand;
-import de.dervonnebe.aps.commands.tpa.TPA;
+import de.dervonnebe.aps.commands.tpa.*;
 import de.dervonnebe.aps.events.*;
 import de.dervonnebe.aps.utils.ConfigManager;
 import de.dervonnebe.aps.utils.Messages;
@@ -69,6 +69,15 @@ public final class APSurvival extends JavaPlugin {
         getCommand("msg").setTabCompleter(msgCommand);
         getCommand("reply").setExecutor(msgCommand);
         getCommand("r").setExecutor(msgCommand);
+
+        getCommand("tpall").setExecutor(new TPAllCommand(this));
+        getCommand("tpaall").setExecutor(new TPAAllCommand(this));
+        getCommand("tpahere").setExecutor(new TPAHereCommand(this));
+        getCommand("tpacancel").setExecutor(new TPACancelCommand(this));
+        getCommand("tpa").setExecutor(new TPACommand(this));
+        getCommand("tpaccept").setExecutor(new TPAcceptCommand(this));
+        getCommand("tpauto").setExecutor(new TPAAutoCommand(this));
+
 
         log("Commands registered!");
     }
