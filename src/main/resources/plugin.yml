@@ -8,13 +8,18 @@ website: https://dervonnebe.de/ap/survival
 commands:
     apsurvival:
         description: Main command for AP-Survival
-        usage: /apsurvival
+        usage: /<command>
         aliases: [aps]
     gamemode:
         description: Setze den Gamemode.
         usage: /<command> <0,1,2,3,a,s,c,sp,survival,adventure,creative,spectator> [spieler]
         aliases:
             - gm
+    teleport:
+        description: Teleportiere dich zu einem Spieler.
+        usage: /<command> <spieler,location>
+        aliases:
+            - tp
 
 permissions:
     apsurvival.admin:
