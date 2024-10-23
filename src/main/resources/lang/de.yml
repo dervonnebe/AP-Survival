@@ -4,6 +4,10 @@
 
 no-perm: "&cDu hast keine Berechtigung, das zu tun. §8(§7%perm%§8)"
 
+button:
+  accept: "§8[§aAkzeptieren§8]"
+  decline: "§8[§cAblehnen§8]"
+
 join-leaves:
   join: "§a%player% §7hat den Server betreten."
   leave: "§c%player% §7hat den Server verlassen."
@@ -12,17 +16,20 @@ join-leaves:
     subtitle: "§7Viel Spaß beim Spielen!"
     actionbar: "§7Willkommen auf dem Server, §a%player%§7!"
     chat: "§7Willkommen auf dem Server, §a%player%§7!"
+
 command:
   # Command Fehlermeldungen
   player-not-found: "Spieler nicht gefunden!"
   only-players: "Dieser Befehl kann nur von Spielern ausgeführt werden."
   invalid: "Ungültiger Befehl! Bitte benutze %command%."
+
   # Command Nachrichten
   gamemode:
     current-gamemode: "Ihr aktueller Spielmodus ist: %gamemode%"
     change: "Ihr Spielmodus wurde auf %gamemode% geändert."
     change-other: "%target% wurde auf den Spielmodus %gamemode% geändert."
     invalid-gamemode: "Ungültiger Spielmodus! Bitte benutze einen gültigen Gamemode."
+
   msg:
     no-reply: "Du hast niemanden, an den du antworten kannst."
     cannot-receive: "&cDieser Spieler kann keine Nachrichten empfangen."
@@ -30,3 +37,27 @@ command:
       sender: "§7[Du -> §f%target%§7]: §f%message%"
       receiver: "§7[§f%sender%§7 -> Dir]: §f%message%"
 
+  tpa:
+    request: "%player% möchte sich zu dir teleportieren. %btn-accept% %btn-decline%"
+
+  tpall:
+    success: "Alle Spieler wurden zu dir teleportiert."
+
+  tpaall:
+    sent: "Du hast Teleportanfragen an alle Online-Spieler gesendet."
+
+  tpahere:
+    sent: "Du hast eine Teleportanfrage an %target% gesendet."
+
+  tpacancel:
+    no-request: "Es gibt keine ausstehende Anfrage."
+    success: "Die Teleportanfrage an %target% wurde storniert."
+    all-cancelled: "Alle ausstehenden Teleportanfragen wurden storniert."
+
+  tpaccept:
+    success: "%player% hat deine Teleportanfrage akzeptiert."
+    no-request: "Es gibt keine ausstehende Anfrage, die akzeptiert werden kann."
+
+  tpauto:
+    enabled: "Du hast das automatische Akzeptieren von Teleportanfragen aktiviert."
+    sucsess: "Du hast die Teleportanfrage von %player% automatisch angenommen"

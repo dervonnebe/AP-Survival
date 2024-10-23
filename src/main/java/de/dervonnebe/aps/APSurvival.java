@@ -4,6 +4,7 @@ import de.dervonnebe.aps.commands.APSurvivalCommand;
 import de.dervonnebe.aps.commands.GamemodeCommand;
 import de.dervonnebe.aps.commands.MSGCommand;
 import de.dervonnebe.aps.commands.TeleportCommand;
+import de.dervonnebe.aps.commands.tpa.TPA;
 import de.dervonnebe.aps.events.*;
 import de.dervonnebe.aps.utils.ConfigManager;
 import de.dervonnebe.aps.utils.Messages;
@@ -24,6 +25,8 @@ public final class APSurvival extends JavaPlugin {
     Messages messages;
     @Getter
     ConfigManager configManager;
+    @Getter
+    TPA tpa;
 
     @Override
     public void onEnable() {
@@ -33,6 +36,7 @@ public final class APSurvival extends JavaPlugin {
         messages = new Messages(this);
         dataManager = new PersistentDataManager(this);
         configManager = new ConfigManager(this);
+        tpa = new TPA(this);
 
         registerCommands();
         registerEvents();

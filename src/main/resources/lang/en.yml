@@ -12,20 +12,47 @@ join-leaves:
     subtitle: "§7Have fun playing!"
     actionbar: "§7Welcome to the server, §a%player%§7!"
     chat: "§7Welcome to the server, §a%player%§7!"
+
 command:
   # Command error messages
   player-not-found: "Player not found!"
   only-players: "This command can only be executed by players."
   invalid: "Invalid command! Please use %command%."
+
   # Command messages
   gamemode:
     current-gamemode: "Your current gamemode is: %gamemode%"
     change: "Your gamemode has been changed to %gamemode%."
     change-other: "%target% has been changed to gamemode %gamemode%."
     invalid-gamemode: "Invalid gamemode! Please use a valid gamemode."
+
   msg:
     no-reply: "You have no one to reply to."
     cannot-receive: "&cThis player cannot receive messages."
     format:
       sender: "§7[You -> §f%target%§7]: §f%message%"
       receiver: "§7[§f%sender%§7 -> You]: §f%message%"
+
+  tpa:
+    request: "%player% wants to teleport to you. %btn-accept% %btn-decline%"
+
+  tpall:
+    success: "All players have been teleported to you."
+
+  tpaall:
+    sent: "You have sent teleport requests to all online players."
+
+  tpahere:
+    sent: "You sent a teleport request to %player%."
+
+  tpacancel:
+    no-request: "Currently no teleport requests."
+    success: "The teleport request to %player% was cancelled."
+    all-cancelled: "All pending teleport requests have been cancelled."
+
+  tpaccept:
+    success: "%player% has accepted your teleport request."
+    no-request: "There is no pending request that can be accepted."
+
+  tpauto:
+    enabled: "You have enabled automatic acceptance of teleport requests."
