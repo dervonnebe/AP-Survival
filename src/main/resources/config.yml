@@ -34,6 +34,6 @@ join-leaves:
     no-message: false
     particle: true
 
-
+bstats: true # If you want to support the plugin, set this to false
 # Do not change the following settings unless you know what you are doing
 file-version: 1.0-BETA

@@ -7,10 +7,7 @@ import de.dervonnebe.aps.commands.TeleportCommand;
 import de.dervonnebe.aps.commands.tpa.*;
 import de.dervonnebe.aps.events.*;
 import de.dervonnebe.aps.setup.DatabaseSetup;
-import de.dervonnebe.aps.utils.ConfigManager;
-import de.dervonnebe.aps.utils.DatabaseManager;
-import de.dervonnebe.aps.utils.Messages;
-import de.dervonnebe.aps.utils.PersistentDataManager;
+import de.dervonnebe.aps.utils.*;
 import lombok.Getter;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -31,6 +28,7 @@ public final class APSurvival extends JavaPlugin {
     TPA tpa;
     @Getter
     DatabaseManager databaseManager;
+    @Getter
     DatabaseSetup databaseSetup;
 
     @Override
@@ -47,6 +45,7 @@ public final class APSurvival extends JavaPlugin {
         setupDatabase(true);
         registerCommands();
         registerEvents();
+        registerBStats();
         log("APSurvival started!");
     }
 
@@ -105,6 +104,19 @@ public final class APSurvival extends JavaPlugin {
         pm.registerEvents(new CommandTabCompleteEvent(), this);
 
         log("Events registered!");
+    }
+
+    private void registerBStats() {
+        log("Registering bStats...");
+        if (configManager.getBoolean("bstats")) {
+            log("bStats is disabled in the config. Skipping registration!");
+            return;
+        }
+        Metrics metrics = new Metrics(this, 23707);
+
+        // Optional: Add custom charts
+        //metrics.addCustomChart(new Metrics.SimplePie("chart_id", () -> ""));
+        log("bStats registered!");
     }
 
     // Console Logger
