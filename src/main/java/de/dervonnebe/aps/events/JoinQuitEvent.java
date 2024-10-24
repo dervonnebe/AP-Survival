@@ -2,6 +2,7 @@ package de.dervonnebe.aps.events;
 
 import de.dervonnebe.aps.APSurvival;
 import de.dervonnebe.aps.utils.ConfigManager;
+import de.dervonnebe.aps.utils.DatabaseManager;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -17,15 +18,20 @@ public class JoinQuitEvent implements Listener {
 
     private final APSurvival plugin;
     private final ConfigManager configManager;
+    private DatabaseManager databaseManager;
 
     public JoinQuitEvent(APSurvival plugin) {
         this.plugin = plugin;
         this.configManager = plugin.getConfigManager();
+        this.databaseManager = plugin.getDatabaseManager();
     }
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
+
+        // Add User to Database if not already in
+        databaseManager.executeUpdate("INSERT OR IGNORE INTO users (uuid, username) VALUES ('" + player.getUniqueId() + "', '" + player.getName() + "')");
 
         if (configManager.getBoolean("join-leaves.join.particle")) {
             player.getWorld().spawnParticle(Particle.HAPPY_VILLAGER, player.getLocation(), 100, 0.5, 0.5, 0.5, 0.1);

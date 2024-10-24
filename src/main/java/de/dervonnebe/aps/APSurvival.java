@@ -6,7 +6,9 @@ import de.dervonnebe.aps.commands.MSGCommand;
 import de.dervonnebe.aps.commands.TeleportCommand;
 import de.dervonnebe.aps.commands.tpa.*;
 import de.dervonnebe.aps.events.*;
+import de.dervonnebe.aps.setup.DatabaseSetup;
 import de.dervonnebe.aps.utils.ConfigManager;
+import de.dervonnebe.aps.utils.DatabaseManager;
 import de.dervonnebe.aps.utils.Messages;
 import de.dervonnebe.aps.utils.PersistentDataManager;
 import lombok.Getter;
@@ -27,6 +29,9 @@ public final class APSurvival extends JavaPlugin {
     ConfigManager configManager;
     @Getter
     TPA tpa;
+    @Getter
+    DatabaseManager databaseManager;
+    DatabaseSetup databaseSetup;
 
     @Override
     public void onEnable() {
@@ -37,7 +42,9 @@ public final class APSurvival extends JavaPlugin {
         dataManager = new PersistentDataManager(this);
         configManager = new ConfigManager(this);
         tpa = new TPA(this);
+        databaseManager = new DatabaseManager(this);
 
+        setupDatabase(true);
         registerCommands();
         registerEvents();
         log("APSurvival started!");
@@ -46,7 +53,15 @@ public final class APSurvival extends JavaPlugin {
     @Override
     public void onDisable() {
         log("Stopping APSurvival...");
+        databaseManager.closeConnection();
         log("APSurvival stopped!","BYE");
+    }
+
+    private void setupDatabase(Boolean rebuild) {
+        log("Setting up database...");
+        databaseSetup = new DatabaseSetup(this);
+        databaseSetup.setupTables(rebuild);
+        log("Database setup complete!");
     }
 
     private void registerCommands() {

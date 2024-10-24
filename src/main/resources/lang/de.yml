@@ -37,6 +37,21 @@ command:
       sender: "§7[Du -> §f%target%§7]: §f%message%"
       receiver: "§7[§f%sender%§7 -> Dir]: §f%message%"
 
+  msgtoggle:
+    on: "Du hast alle privaten Nachrichten deaktiviert."
+    off: "Du hast alle privaten Nachrichten aktiviert."
+    player:
+      blocked: "Du hast Nachrichten von %player% blockiert."
+      not-blocked: "Du hast Nachrichten von %player% nicht blockiert."
+      on: "Du hast Nachrichten von %player% wieder aktiviert."
+      off: "Du hast Nachrichten von %player% deaktiviert."
+      temp:
+        on: "Du hast Nachrichten von %player% für %duration% blockiert."
+        off: "Du kannst nun wieder Nachrichten von %player% erhalten."
+    temp:
+      on: "Du hast alle Nachrichten für %duration% blockiert."
+      off: "Du kannst jetzt wieder private Nachrichten erhalten."
+
   tpa:
     request: "%player% möchte sich zu dir teleportieren. %btn-accept% %btn-decline%"
 
@@ -61,3 +76,14 @@ command:
   tpauto:
     enabled: "Du hast das automatische Akzeptieren von Teleportanfragen aktiviert."
     sucsess: "Du hast die Teleportanfrage von %player% automatisch angenommen"
+
+database:
+  connection:
+    success: "Die Verbindung zur Datenbank wurde erfolgreich hergestellt. §8[§7%type%§8]"
+    error: "Fehler beim Verbinden zu %type%: %error%"
+    closed: "Die Verbindung zur Datenbank wurde geschlossen."
+    query-error: "Fehler beim Ausführen der Abfrage: %error% §8[§7%query%§8]"
+  setup:
+    tables:
+      success: "Die Tabellen wurden erfolgreich erstellt."
+      error: "Fehler beim Erstellen der Tabellen: %error%"

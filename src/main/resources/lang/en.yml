@@ -33,6 +33,21 @@ command:
       sender: "§7[You -> §f%target%§7]: §f%message%"
       receiver: "§7[§f%sender%§7 -> You]: §f%message%"
 
+  msgtoggle:
+    on: "You have blocked all private messages."
+    off: "You have unblocked all private messages."
+    player:
+      blocked: "You have blocked messages from %player%."
+      not-blocked: "You have not blocked messages from %player%."
+      on: "You have enabled messages from %player% again."
+      off: "You have disabled messages from %player%."
+      temp:
+        on: "You have blocked messages from %player% for %duration%."
+        off: "You can now receive messages from %player% again."
+    temp:
+      on: "You have blocked all messages for %duration%."
+      off: "You can now receive private messages again."
+
   tpa:
     request: "%player% wants to teleport to you. %btn-accept% %btn-decline%"
 
@@ -56,3 +71,14 @@ command:
 
   tpauto:
     enabled: "You have enabled automatic acceptance of teleport requests."
+
+database:
+  connection:
+    success: "Successfully connected to the database. §8[§7%type%§8]"
+    error: "Error connecting to %type%: %error%"
+    closed: "The database connection has been closed."
+    query-error: "Error executing the query: %error% §8[§7%query%§8]"
+  setup:
+    tables:
+      success: "Successfully created tables in the database."
+      error: "Error creating tables in the database: %error%"
