@@ -60,6 +60,11 @@ Hier sind die Berechtigungen, die für die Nutzung des Plugins erforderlich sind
 
 Für Unterstützung und Fehlermeldungen wende dich bitte an den Entwickler oder besuche das entsprechende Forum.
 
+## Code Stats
+Gesamt im Projekt: 
+Dateien: 1122,
+Zeilen Code: 24789
+
 ---
 
 **Viel Spaß mit dem AP-Survival Plugin!**
