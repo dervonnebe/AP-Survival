@@ -86,6 +86,10 @@ public final class APSurvival extends JavaPlugin {
         log("Registering events...");
         PluginManager pm = getServer().getPluginManager();
         pm.registerEvents(new JoinQuitEvent(this), this);
+        pm.registerEvents(new CommandPreProcessEvent(this), this);
+        pm.registerEvents(new CommandTabCompleteEvent(), this);
+
+        log("Events registered!");
     }
 
     // Console Logger

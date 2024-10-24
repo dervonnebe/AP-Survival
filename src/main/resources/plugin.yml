@@ -75,6 +75,9 @@ permissions:
     aps.user:
         description: "Permission for all user commands"
         default: true
+    aps.command.minecraft:
+        description: "Permission for all commands with minecraft: prefix"
+        default: false
     aps.command.reply:
         description: "Permission to reply to private messages"
         default: true
