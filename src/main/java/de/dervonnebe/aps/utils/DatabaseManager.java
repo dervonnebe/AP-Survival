@@ -4,12 +4,7 @@ import de.dervonnebe.aps.APSurvival;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 public class DatabaseManager {
     private final APSurvival plugin;
@@ -26,104 +21,100 @@ public class DatabaseManager {
         String url;
 
         if (type.equalsIgnoreCase("mysql") || type.equalsIgnoreCase("mariadb")) {
-            String host = plugin.getConfig().getString("database.host", "localhost");
-            int port = plugin.getConfig().getInt("database.port", 3306);
-            String database = plugin.getConfig().getString("database.name", "apsurvival");
-            String username = plugin.getConfig().getString("database.username", "root");
-            String password = plugin.getConfig().getString("database.password", "password123");
-            url = "jdbc:mysql://" + host + ":" + port + "/" + database;
-            try {
-                connection = DriverManager.getConnection(url, username, password);
-                plugin.log(msg.getMessage("database.connection.success").replace("%type%", "MySQL"));
-            } catch (SQLException e) {
-                e.printStackTrace();
-                plugin.log(msg.getMessage("database.connection.error").replace("%type%", "MySQL").replace("%error%", e.getMessage()), "ERROR");
-            }
+            url = setupMySQL();
         } else {
-            String databasePath = plugin.getDataFolder().getAbsolutePath() + "/data.aps";
-            url = "jdbc:sqlite:" + databasePath;
-            try {
-                connection = DriverManager.getConnection(url);
-                plugin.log(msg.getMessage("database.connection.success").replace("%type%", "SQLite"));
-            } catch (SQLException e) {
-                e.printStackTrace();
-                plugin.log(msg.getMessage("database.connection.error").replace("%type%", "SQLite").replace("%error%", e.getMessage()), "ERROR");
-            }
+            url = setupSQLite();
         }
     }
 
-    // Schließen der Datenbankverbindung
+    private String setupMySQL() {
+        String host = plugin.getConfig().getString("database.host", "localhost");
+        int port = plugin.getConfig().getInt("database.port", 3306);
+        String database = plugin.getConfig().getString("database.name", "apsurvival");
+        String username = plugin.getConfig().getString("database.username", "root");
+        String password = plugin.getConfig().getString("database.password", "password123");
+        String url = "jdbc:mysql://" + host + ":" + port + "/" + database;
+
+        try {
+            connection = DriverManager.getConnection(url, username, password);
+            plugin.log(msg.getMessage("database.connection.success").replace("%type%", "MySQL"));
+        } catch (SQLException e) {
+            logSQLException(e, "MySQL");
+        }
+        return url;
+    }
+
+    private String setupSQLite() {
+        String databasePath = plugin.getDataFolder().getAbsolutePath() + "/data.aps";
+        String url = "jdbc:sqlite:" + databasePath;
+
+        try {
+            connection = DriverManager.getConnection(url);
+            plugin.log(msg.getMessage("database.connection.success").replace("%type%", "SQLite"));
+        } catch (SQLException e) {
+            logSQLException(e, "SQLite");
+        }
+        return url;
+    }
+
     public void closeConnection() {
         if (connection != null) {
             try {
                 connection.close();
                 plugin.log(msg.getMessage("database.connection.closed"));
             } catch (SQLException e) {
-                StringWriter sw = new StringWriter();
-                PrintWriter pw = new PrintWriter(sw);
-                e.printStackTrace(pw);
-
-                plugin.log(msg.getMessage("database.connection.close-error").replace("%error%", sw.toString()), "ERROR");
+                logSQLException(e, "closing connection");
             }
         }
     }
 
-    // Ausführen von SQL-Befehlen ohne Rückgabewert (z.B. INSERT, UPDATE, DELETE)
     public void executeUpdate(String query) {
         try (Statement stmt = connection.createStatement()) {
             stmt.executeUpdate(query);
         } catch (SQLException e) {
-            StringWriter sw = new StringWriter();
-            PrintWriter pw = new PrintWriter(sw);
-            e.printStackTrace(pw);
-
-            plugin.log(msg.getMessage("database.query-error").replace("%query%", query).replace("%error%", sw.toString()), "ERROR");
+            logSQLException(e, "executing update: " + query);
         }
     }
 
-    // Ausführen von SQL-Befehlen mit Rückgabewert (z.B. SELECT)
     public ResultSet executeQuery(String query) {
         try (Statement stmt = connection.createStatement()) {
             return stmt.executeQuery(query);
         } catch (SQLException e) {
-            StringWriter sw = new StringWriter();
-            PrintWriter pw = new PrintWriter(sw);
-            e.printStackTrace(pw);
-
-            plugin.log(msg.getMessage("database.query-error").replace("%query%", query).replace("%error%", sw.toString()), "ERROR");
+            logSQLException(e, "executing query: " + query);
             return null;
         }
     }
 
-    // Beispiel für Prepared Statements
     public void executePreparedUpdate(String query, Object... params) {
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
-            for (int i = 0; i < params.length; i++) {
-                stmt.setObject(i + 1, params[i]);
-            }
+            setParameters(stmt, params);
             stmt.executeUpdate();
         } catch (SQLException e) {
-            StringWriter sw = new StringWriter();
-            PrintWriter pw = new PrintWriter(sw);
-            e.printStackTrace(pw);
-
-            plugin.log(msg.getMessage("database.query-error").replace("%query%", query).replace("%error%", sw.toString()), "ERROR");
+            logSQLException(e, "executing prepared update: " + query);
         }
     }
 
     public ResultSet executePreparedQuery(String query, Object... params) {
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
-            for (int i = 0; i < params.length; i++) {
-                stmt.setObject(i + 1, params[i]);
-            }
+            setParameters(stmt, params);
             return stmt.executeQuery();
         } catch (SQLException e) {
-            StringWriter sw = new StringWriter();
-            PrintWriter pw = new PrintWriter(sw);
-            e.printStackTrace(pw);
-
-            plugin.log(msg.getMessage("database.query-error").replace("%query%", query).replace("%error%", sw.toString()), "ERROR");
+            logSQLException(e, "executing prepared query: " + query);
             return null;
         }
+    }
+
+    private void setParameters(PreparedStatement stmt, Object... params) throws SQLException {
+        for (int i = 0; i < params.length; i++) {
+            stmt.setObject(i + 1, params[i]);
+        }
+    }
+
+    private void logSQLException(SQLException e, String context) {
+        StringWriter sw = new StringWriter();
+        e.printStackTrace(new PrintWriter(sw));
+        plugin.log(msg.getMessage("database.query-error")
+                .replace("%query%", context)
+                .replace("%error%", sw.toString()), "ERROR");
     }
 }
