@@ -73,7 +73,7 @@ public class TeleportCommand implements CommandExecutor, TabCompleter {
                     sender.sendMessage(plugin.getPrefix() + msg.getMessage("command.invalid-location"));
                 }
             } else {
-                sender.sendMessage(plugin.getPrefix() + msg.getMessage("command.player-not-found"));
+                sender.sendMessage(plugin.getPrefix() + msg.getMessage("command.player-not-found").replace("%player%", args[0]));
             }
             return true;
         } else if (args.length == 3) {

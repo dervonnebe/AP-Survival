@@ -19,7 +19,7 @@ join-leaves:
 
 command:
   # Command Fehlermeldungen
-  player-not-found: "Spieler nicht gefunden!"
+  player-not-found: "§cSpieler nicht gefunden! §8(§7%player%§8)"
   only-players: "Dieser Befehl kann nur von Spielern ausgeführt werden."
   invalid: "Ungültiger Befehl! Bitte benutze %command%."
   invalid-int: "Ungültige Zahl! Bitte benutze eine gültige Zahl. §8(§7%int%§8)"
@@ -90,6 +90,14 @@ command:
     time:
       current: "§7Die aktuelle Zeit ist: §f§l%time%"
       set: "§7Die Zeit wurde auf §f§l%time%§7 gesetzt."
+
+  essential:
+    heal: "§7Du wurdest geheilt."
+    heal-from: "§7Du wurdest von §f§l%player%§7 geheilt."
+    heal-other: "§f§l%player%§7 wurde geheilt."
+    feed: "§7Du wurdest gefüttert."
+    feed-from: "§7Du wurdest von §f§l%player%§7 gefüttert."
+    feed-other: "§f§l%player%§7 wurde gefüttert."
 
 database:
   connection:

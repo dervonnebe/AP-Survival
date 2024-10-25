@@ -42,7 +42,7 @@ public class TPAHereCommand implements CommandExecutor {
 
         Player target = Bukkit.getPlayer(args[0]);
         if (target == null) {
-            player.sendMessage(msg.getPlayerMessage(player, "command.player-not-found"));
+            player.sendMessage(msg.getPlayerMessage(player, "command.player-not-found").replace("%player%", args[0]));
             return true;
         }
 

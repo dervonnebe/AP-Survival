@@ -88,7 +88,7 @@ public class GamemodeCommand implements CommandExecutor, TabCompleter {
                         .replace("%target%", targetPlayer.getName())
                         .replace("%gamemode%", newGameMode.name()));
             } else {
-                player.sendMessage(plugin.getPrefix() + msg.getPlayerMessage(player, "command.player-not-found"));
+                player.sendMessage(plugin.getPrefix() + msg.getPlayerMessage(player, "command.player-not-found").replace("%player%", args[1]));
             }
             return true;
         }

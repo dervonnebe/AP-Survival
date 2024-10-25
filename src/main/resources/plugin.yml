@@ -103,6 +103,14 @@ commands:
         description: "Setze das Wetter."
         usage: "/weather <wetter> [welt | time]"
 
+    heal:
+        description: "Heile dich."
+        usage: "/heal [spieler]"
+
+    feed:
+        description: "Füttere dich."
+        usage: "/feed [spieler]"
+
 permissions:
     aps.admin:
         description: "Permission for all admin commands"

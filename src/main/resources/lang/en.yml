@@ -15,7 +15,7 @@ join-leaves:
 
 command:
   # Command error messages
-  player-not-found: "Player not found!"
+  player-not-found: "§cPlayer not found! §8(§7%player%§8)"
   only-players: "This command can only be executed by players."
   invalid: "Invalid command! Please use %command%."
   invalid-int: "Invalid number! Please use a valid number. §8(§7%int%§8)"
@@ -82,6 +82,15 @@ command:
     sun: "§7The weather has been set to §f§lclear§7."
     rain: "§7The weather has been set to §f§lrain§7."
     thunder: "§7The weather has been set to §f§lthunderstorm§7."
+
+  essential:
+    heal: "§7You have been healed."
+    heal-from: "§7You have been healed by §f§l%player%§7."
+    heal-other: "§f§l%player%§7 has been healed."
+    feed: "§7You have been fed."
+    feed-from: "§7You have been fed by §f§l%player%§7."
+    feed-other: "§f§l%player%§7 has been fed."
+
 
 database:
   connection:

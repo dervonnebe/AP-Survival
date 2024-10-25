@@ -1,10 +1,8 @@
 package de.dervonnebe.aps;
 
-import de.dervonnebe.aps.commands.APSurvivalCommand;
-import de.dervonnebe.aps.commands.GamemodeCommand;
-import de.dervonnebe.aps.commands.MSGCommand;
-import de.dervonnebe.aps.commands.TeleportCommand;
+import de.dervonnebe.aps.commands.*;
 import de.dervonnebe.aps.commands.environment.*;
+import de.dervonnebe.aps.commands.essential.*;
 import de.dervonnebe.aps.commands.tpa.*;
 import de.dervonnebe.aps.events.*;
 import de.dervonnebe.aps.setup.DatabaseSetup;
@@ -121,6 +119,14 @@ public final class APSurvival extends JavaPlugin {
         TimeCommand timeCommand = new TimeCommand(this);
         getCommand("time").setExecutor(timeCommand);
         getCommand("time").setTabCompleter(timeCommand);
+
+        HealCommand healCommand = new HealCommand(this);
+        getCommand("heal").setExecutor(healCommand);
+        getCommand("heal").setTabCompleter(healCommand);
+
+        FeedCommand feedCommand = new FeedCommand(this);
+        getCommand("feed").setExecutor(feedCommand);
+        getCommand("feed").setTabCompleter(feedCommand);
 
 
         log("Commands registered!");
