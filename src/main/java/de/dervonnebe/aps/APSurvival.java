@@ -4,6 +4,7 @@ import de.dervonnebe.aps.commands.APSurvivalCommand;
 import de.dervonnebe.aps.commands.GamemodeCommand;
 import de.dervonnebe.aps.commands.MSGCommand;
 import de.dervonnebe.aps.commands.TeleportCommand;
+import de.dervonnebe.aps.commands.environment.*;
 import de.dervonnebe.aps.commands.tpa.*;
 import de.dervonnebe.aps.events.*;
 import de.dervonnebe.aps.setup.DatabaseSetup;
@@ -34,13 +35,13 @@ public final class APSurvival extends JavaPlugin {
     @Override
     public void onEnable() {
         log("Starting APSurvival...");
-        prefix = "§4§lAPS §8▶ §7";
         instance = this;
         messages = new Messages(this);
         dataManager = new PersistentDataManager(this);
         configManager = new ConfigManager(this);
         tpa = new TPA(this);
         databaseManager = new DatabaseManager(this);
+        prefix = configManager.getString("prefix");
 
         setupDatabase(true);
         registerCommands();
@@ -91,6 +92,35 @@ public final class APSurvival extends JavaPlugin {
         getCommand("tpa").setExecutor(new TPACommand(this));
         getCommand("tpaccept").setExecutor(new TPAcceptCommand(this));
         getCommand("tpauto").setExecutor(new TPAAutoCommand(this));
+
+        SunCommand sunCommand = new SunCommand(this);
+        getCommand("sun").setExecutor(sunCommand);
+
+        RainCommand rainCommand = new RainCommand(this);
+        getCommand("rain").setExecutor(rainCommand);
+
+        ThunderCommand thunderCommand = new ThunderCommand(this);
+        getCommand("thunder").setExecutor(thunderCommand);
+
+        DayCommand dayCommand = new DayCommand(this);
+        getCommand("day").setExecutor(dayCommand);
+
+        NightCommand nightCommand = new NightCommand(this);
+        getCommand("night").setExecutor(nightCommand);
+
+        SunriseCommand sunriseCommand = new SunriseCommand(this);
+        getCommand("sunrise").setExecutor(sunriseCommand);
+
+        SunsetCommand sunsetCommand = new SunsetCommand(this);
+        getCommand("sunset").setExecutor(sunsetCommand);
+
+        WeatherCommand weatherCommand = new WeatherCommand(this);
+        getCommand("weather").setExecutor(weatherCommand);
+        getCommand("weather").setTabCompleter(weatherCommand);
+
+        TimeCommand timeCommand = new TimeCommand(this);
+        getCommand("time").setExecutor(timeCommand);
+        getCommand("time").setTabCompleter(timeCommand);
 
 
         log("Commands registered!");
