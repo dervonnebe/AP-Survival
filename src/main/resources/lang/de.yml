@@ -77,6 +77,18 @@ command:
     enabled: "Du hast das automatische Akzeptieren von Teleportanfragen aktiviert."
     sucsess: "Du hast die Teleportanfrage von %player% automatisch angenommen"
 
+  environment:
+    day: "§7Die Zeit wurde auf §f§lTag§7 gesetzt."
+    night: "§7Die Zeit wurde auf §f§lNacht§7 gesetzt."
+    sunrise: "§7Die Zeit wurde auf §f§lSonnenaufgang§7 gesetzt."
+    sunset: "§7Die Zeit wurde auf §f§lSonnenuntergang§7 gesetzt."
+    sun: "§7Das Wetter wurde auf §f§lklar§7 gesetzt."
+    rain: "§7Das Wetter wurde auf §f§lRegen§7 gesetzt."
+    thunder: "§7Das Wetter wurde auf §f§lGewitter§7 gesetzt."
+    time:
+      current: "§7Die aktuelle Zeit ist: §f§l%time%"
+      set: "§7Die Zeit wurde auf §f§l%time%§7 gesetzt."
+
 database:
   connection:
     success: "Die Verbindung zur Datenbank wurde erfolgreich hergestellt. §8[§7%type%§8]"

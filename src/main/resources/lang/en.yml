@@ -72,6 +72,15 @@ command:
   tpauto:
     enabled: "You have enabled automatic acceptance of teleport requests."
 
+  environment:
+    day: "§7The time has been set to §f§lday§7."
+    night: "§7The time has been set to §f§lnight§7."
+    sunrise: "§7The time has been set to §f§lsunrise§7."
+    sunset: "§7The time has been set to §f§lsunset§7."
+    sun: "§7The weather has been set to §f§lclear§7."
+    rain: "§7The weather has been set to §f§lrain§7."
+    thunder: "§7The weather has been set to §f§lthunderstorm§7."
+
 database:
   connection:
     success: "Successfully connected to the database. §8[§7%type%§8]"
