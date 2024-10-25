@@ -67,6 +67,41 @@ commands:
         description: "Aktiviere das automatische Akzeptieren von Teleportanfragen."
         usage: "/tpauto"
 
+    day:
+        description: "Setze die Zeit auf Tag."
+        usage: "/day"
+
+    night:
+        description: "Setze die Zeit auf Nacht."
+        usage: "/night"
+
+    sunrise:
+        description: "Setze die Zeit auf Sonnenaufgang."
+        usage: "/sunrise"
+
+    sunset:
+        description: "Setze die Zeit auf Sonnenuntergang."
+        usage: "/sunset"
+
+    sun:
+        description: "Setze das Wetter auf Klar."
+        usage: "/sun"
+
+    rain:
+        description: "Setze das Wetter auf Regen."
+        usage: "/rain"
+
+    thunder:
+        description: "Setze das Wetter auf Gewitter."
+        usage: "/thunder"
+
+    time:
+        description: "Setze die Zeit."
+        usage: "/time <zeit> [welt]"
+
+    weather:
+        description: "Setze das Wetter."
+        usage: "/weather <wetter> [welt | time]"
 
 permissions:
     aps.admin:
