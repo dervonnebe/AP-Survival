@@ -5,10 +5,15 @@ import de.dervonnebe.aps.utils.Messages;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-public class TimeCommand implements CommandExecutor {
+import java.util.ArrayList;
+import java.util.List;
+
+public class TimeCommand implements CommandExecutor, TabCompleter {
     private final APSurvival plugin;
     private final Messages msg;
 
@@ -82,5 +87,19 @@ public class TimeCommand implements CommandExecutor {
 
     private void sendCurrentTime(Player player) {
         player.sendMessage(plugin.getPrefix() + msg.getMessage("command.environment.time.current").replace("%time%", String.valueOf(player.getWorld().getTime())));
+    }
+
+    @Override
+    public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String alias, @NotNull String[] args) {
+        List<String> completions = new ArrayList<>();
+
+        if (args.length == 1) {
+            completions.add("day");
+            completions.add("night");
+            completions.add("sunset");
+            completions.add("sunrise");
+        }
+
+        return completions;
     }
 }
