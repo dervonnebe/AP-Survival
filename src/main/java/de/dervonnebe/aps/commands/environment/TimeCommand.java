@@ -9,8 +9,8 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 public class TimeCommand implements CommandExecutor {
-    APSurvival plugin;
-    Messages msg;
+    private final APSurvival plugin;
+    private final Messages msg;
 
     public TimeCommand(APSurvival plugin) {
         this.plugin = plugin;
@@ -18,67 +18,69 @@ public class TimeCommand implements CommandExecutor {
     }
 
     @Override
-    public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
-        Player player = (Player) commandSender;
+    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
+        if (!(sender instanceof Player)) {
+            sender.sendMessage(msg.getMessage("command.only-players"));
+            return true;
+        }
 
-        if (player.hasPermission("aps.command.time")) {
-            if (strings.length == 1) {
+        Player player = (Player) sender;
 
-                strings[0] = strings[0].toLowerCase();
-
-                switch (strings[0]) {
-                    case "day":
-                        if (player.hasPermission("aps.command.time.day")) {
-                            player.getWorld().setTime(1000);
-                            player.sendMessage(plugin.getPrefix() + msg.getMessage("command.environment.day"));
-                        } else {
-                            player.sendMessage(plugin.getPrefix() + msg.getMessage("command.no-perm").replace("%perm%", "aps.command.time.day"));
-                        }
-                        return true;
-                    case "night":
-                        if (player.hasPermission("aps.command.time.night")) {
-                            player.getWorld().setTime(13000);
-                            player.sendMessage(plugin.getPrefix() + msg.getMessage("command.environment.night"));
-                        } else {
-                            player.sendMessage(plugin.getPrefix() + msg.getMessage("command.no-perm").replace("%perm%", "aps.command.time.night"));
-                        }
-                        return true;
-                    case "sunset":
-                        if (player.hasPermission("aps.command.time.sunset")) {
-                            player.getWorld().setTime(13000);
-                            player.sendMessage(plugin.getPrefix() + msg.getMessage("command.environment.sunset"));
-                        } else {
-                            player.sendMessage(plugin.getPrefix() + msg.getMessage("command.no-perm").replace("%perm%", "aps.command.time.sunset"));
-                        }
-                        return true;
-                    case "sunrise":
-                        if (player.hasPermission("aps.command.time.sunrise")) {
-                            player.getWorld().setTime(0);
-                            player.sendMessage(plugin.getPrefix() + msg.getMessage("command.environment.sunrise"));
-                        } else {
-                            player.sendMessage(plugin.getPrefix() + msg.getMessage("command.no-perm").replace("%perm%", "aps.command.time.sunrise"));
-                        }
-                        return true;
-                    default:
-                        if (!player.hasPermission("aps.command.time.set")) {
-                            player.sendMessage(plugin.getPrefix() + msg.getMessage("command.no-perm").replace("%perm%", "aps.command.time.set"));
-                            return true;
-                        }
-                        try {
-                            long time = Long.parseLong(strings[0]);
-                            player.getWorld().setTime(time);
-                            player.sendMessage(plugin.getPrefix() + msg.getMessage("command.environment.time.set").replace("%time%", String.valueOf(time)));
-                        } catch (NumberFormatException e) {
-                            player.sendMessage(plugin.getPrefix() + msg.getMessage("command.invalid").replace("%command%", "/time <day|night|sunset|sunrise|<time>>"));
-                        }
-                }
-            } else {
-                player.sendMessage(plugin.getPrefix() + msg.getMessage("command.environment.time.current").replace("%time%", String.valueOf(player.getWorld().getTime())));
-                return true;
-            }
-        } else {
+        if (!player.hasPermission("aps.command.time")) {
             player.sendMessage(plugin.getPrefix() + msg.getMessage("command.no-perm").replace("%perm%", "aps.command.time"));
+            return true;
+        }
+
+        if (args.length == 0) {
+            sendCurrentTime(player);
+            return true;
+        }
+
+        String timeOption = args[0].toLowerCase();
+        switch (timeOption) {
+            case "day":
+                setTimeIfPermitted(player, 1000, "aps.command.time.day", "command.environment.day");
+                break;
+            case "night":
+                setTimeIfPermitted(player, 13000, "aps.command.time.night", "command.environment.night");
+                break;
+            case "sunset":
+                setTimeIfPermitted(player, 13000, "aps.command.time.sunset", "command.environment.sunset");
+                break;
+            case "sunrise":
+                setTimeIfPermitted(player, 0, "aps.command.time.sunrise", "command.environment.sunrise");
+                break;
+            default:
+                setCustomTime(player, timeOption);
+                break;
         }
         return true;
+    }
+
+    private void setTimeIfPermitted(Player player, long time, String perm, String messageKey) {
+        if (player.hasPermission(perm)) {
+            player.getWorld().setTime(time);
+            player.sendMessage(plugin.getPrefix() + msg.getMessage(messageKey));
+        } else {
+            player.sendMessage(plugin.getPrefix() + msg.getMessage("command.no-perm").replace("%perm%", perm));
+        }
+    }
+
+    private void setCustomTime(Player player, String timeArg) {
+        if (!player.hasPermission("aps.command.time.set")) {
+            player.sendMessage(plugin.getPrefix() + msg.getMessage("command.no-perm").replace("%perm%", "aps.command.time.set"));
+            return;
+        }
+        try {
+            long time = Long.parseLong(timeArg);
+            player.getWorld().setTime(time);
+            player.sendMessage(plugin.getPrefix() + msg.getMessage("command.environment.time.set").replace("%time%", String.valueOf(time)));
+        } catch (NumberFormatException e) {
+            player.sendMessage(plugin.getPrefix() + msg.getMessage("command.invalid").replace("%command%", "/time <day|night|sunset|sunrise|<time>>"));
+        }
+    }
+
+    private void sendCurrentTime(Player player) {
+        player.sendMessage(plugin.getPrefix() + msg.getMessage("command.environment.time.current").replace("%time%", String.valueOf(player.getWorld().getTime())));
     }
 }
