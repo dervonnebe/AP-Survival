@@ -22,6 +22,8 @@ command:
   player-not-found: "Spieler nicht gefunden!"
   only-players: "Dieser Befehl kann nur von Spielern ausgeführt werden."
   invalid: "Ungültiger Befehl! Bitte benutze %command%."
+  invalid-int: "Ungültige Zahl! Bitte benutze eine gültige Zahl. §8(§7%int%§8)"
+  invalid-world: "Ungültige Welt! Bitte benutze eine gültige Welt. §8(§7%world%§8)"
 
   # Command Nachrichten
   gamemode:

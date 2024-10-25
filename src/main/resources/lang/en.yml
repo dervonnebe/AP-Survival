@@ -18,6 +18,8 @@ command:
   player-not-found: "Player not found!"
   only-players: "This command can only be executed by players."
   invalid: "Invalid command! Please use %command%."
+  invalid-int: "Invalid number! Please use a valid number. §8(§7%int%§8)"
+  invalid-world: "Invalid world! Please use a valid world. §8(§7%world%§8)"
 
   # Command messages
   gamemode:
