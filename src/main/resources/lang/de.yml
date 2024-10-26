@@ -111,6 +111,16 @@ command:
       self: "§7God-Mode ist nun §cdeaktiviert§7."
       other: "§7God-Mode für %target% ist nun §cdeaktiviert§7."
 
+  reboot:
+    invalid-time: "Die angegebene Zeit ist ungültig. Bitte geben Sie eine positive Zahl ein."
+    time-out-of-range: "Die angegebene Zeit liegt außerhalb des erlaubten Bereichs. Erlaubter Bereich: %min-time% bis %max-time% Sekunden."
+    
+  server:
+    reboot:
+      now: "Der Server startet jetzt neu!"
+      timer: "Der Server wird in %time% Sekunden neu starten. Bitte bereiten Sie sich auf die Trennung vor."
+      kick: "Sie wurden aufgrund eines Server-Neustarts getrennt. Bitte verbinden Sie sich in Kürze erneut."
+
 database:
   connection:
     success: "Die Verbindung zur Datenbank wurde erfolgreich hergestellt. §8[§7%type%§8]"

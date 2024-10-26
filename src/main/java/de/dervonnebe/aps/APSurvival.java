@@ -3,6 +3,7 @@ package de.dervonnebe.aps;
 import de.dervonnebe.aps.commands.*;
 import de.dervonnebe.aps.commands.environment.*;
 import de.dervonnebe.aps.commands.essential.*;
+import de.dervonnebe.aps.commands.server.*;
 import de.dervonnebe.aps.commands.tpa.*;
 import de.dervonnebe.aps.events.*;
 import de.dervonnebe.aps.setup.DatabaseSetup;
@@ -135,6 +136,10 @@ public final class APSurvival extends JavaPlugin {
         GodModeCommand godModeCommand = new GodModeCommand(this);
         getCommand("godmode").setExecutor(godModeCommand);
         getCommand("godmode").setTabCompleter(godModeCommand);
+
+        RebootCommand rebootCommand = new RebootCommand(this);
+        getCommand("reboot").setExecutor(rebootCommand);
+        getCommand("reboot").setTabCompleter(rebootCommand);
 
 
         log("Commands registered!");

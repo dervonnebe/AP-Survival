@@ -121,6 +121,14 @@ commands:
         aliases:
             - god
 
+    reboot:
+        description: "Fahre dein Server Runter"
+        usage: "/reboot [time]"
+        aliases:
+            - restart
+            - stop
+            - shutdown
+
 permissions:
     aps.admin:
         description: "Permission for all admin commands"

@@ -103,6 +103,15 @@ command:
       self: "§7God mode is now §cdisabled§7."
       other: "§7God mode for %target% is now §cdisabled§7."
 
+  reboot:
+    invalid-time: "The specified time is invalid. Please enter a positive number."
+    time-out-of-range: "The specified time is out of range. Allowed range: %min-time% to %max-time% seconds."
+
+  server:
+    reboot:
+      now: "The server is rebooting now!"
+      timer: "The server will reboot in %time% seconds. Please prepare for disconnection."
+      kick: "You have been disconnected due to server reboot. Please rejoin shortly."
 
 
 
