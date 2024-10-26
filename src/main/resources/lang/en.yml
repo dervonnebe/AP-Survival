@@ -90,6 +90,13 @@ command:
     feed: "§7You have been fed."
     feed-from: "§7You have been fed by §f§l%player%§7."
     feed-other: "§f§l%player%§7 has been fed."
+    fly-on:
+      self: "§7You can now fly."
+      to: "§f%target% §7can now fly."
+    fly-off:
+      self: "§7You can no longer fly."
+      to: "§f%target% §7can no longer fly."
+
 
 
 database:

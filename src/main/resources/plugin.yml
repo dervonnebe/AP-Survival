@@ -111,6 +111,10 @@ commands:
         description: "Füttere dich."
         usage: "/feed [spieler]"
 
+    fly:
+        description: "Gebe dir die Power zum Fliegen oder entneheme sie dir wieder"
+        usage: "/fly [player]"
+
 permissions:
     aps.admin:
         description: "Permission for all admin commands"

@@ -128,6 +128,10 @@ public final class APSurvival extends JavaPlugin {
         getCommand("feed").setExecutor(feedCommand);
         getCommand("feed").setTabCompleter(feedCommand);
 
+        FlyCommand flyCommand = new FlyCommand(this);
+        getCommand("fly").setExecutor(flyCommand);
+        getCommand("fly").setTabCompleter(flyCommand);
+
 
         log("Commands registered!");
     }

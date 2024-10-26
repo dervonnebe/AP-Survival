@@ -98,6 +98,12 @@ command:
     feed: "§7Du wurdest gefüttert."
     feed-from: "§7Du wurdest von §f§l%player%§7 gefüttert."
     feed-other: "§f§l%player%§7 wurde gefüttert."
+    fly-on:
+      self: "§7Du kannst nun fliegen."
+      to: "§f%target% §7kann nun fliegen."
+    fly-off:
+      self: "§7Du kannst nicht mehr fliegen."
+      to: "§f%target% §7kann nicht mehr fliegen."
 
 database:
   connection:
