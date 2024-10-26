@@ -61,10 +61,26 @@ public class Messages {
         return getMessage(key, language);
     }
 
-    public void boradcastInvidualMessage(String key) {
+    public void broadcastIndividualMessage(String key, String[][] placeholders) {
         for (Player player : plugin.getServer().getOnlinePlayers()) {
-            player.sendMessage(plugin.getPrefix() + getPlayerMessage(player, key));
+            String message = getPlayerMessage(player, key);
+            message = replacePlaceholders(message, placeholders);
+            player.sendMessage(plugin.getPrefix() + message);
         }
-        plugin.getServer().getConsoleSender().sendMessage(plugin.getPrefix() + getMessage(key));
+        String consoleMessage = replacePlaceholders(getMessage(key), placeholders);
+        plugin.getServer().getConsoleSender().sendMessage(plugin.getPrefix() + consoleMessage);
+    }
+
+    private String replacePlaceholders(String message, String[][] placeholders) {
+        for (String[] placeholderPair : placeholders) {
+            if (placeholderPair.length == 2) {
+                String placeholder = placeholderPair[0];
+                String value = placeholderPair[1];
+                message = message.replace(placeholder, value);
+            } else {
+                throw new IllegalArgumentException("Each placeholder pair must contain exactly two elements: placeholder and value.");
+            }
+        }
+        return message;
     }
 }
