@@ -26,7 +26,7 @@ public class FeedCommand implements CommandExecutor, TabCompleter {
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         if (!(commandSender instanceof Player)) {
-            commandSender.sendMessage(plugin.getPrefix() + msg.getMessage("command.no-player"));
+            commandSender.sendMessage(plugin.getPrefix() + msg.getMessage("command.only-players"));
             return true;
         }
 

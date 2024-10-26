@@ -29,7 +29,7 @@ public class FlyCommand implements CommandExecutor, TabCompleter {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         if (!(sender instanceof Player)) {
-            sender.sendMessage(plugin.getPrefix() + msg.getMessage("command.no-player"));
+            sender.sendMessage(plugin.getPrefix() + msg.getMessage("command.only-players"));
             return true;
         }
 
