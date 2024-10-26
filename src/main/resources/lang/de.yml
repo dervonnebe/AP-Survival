@@ -104,6 +104,12 @@ command:
     fly-off:
       self: "§7Du kannst nicht mehr fliegen."
       to: "§f%target% §7kann nicht mehr fliegen."
+    godmode-on:
+      self: "§7God-Mode ist nun §aaktiviert§7."
+      other: "§7God-Mode für %target% ist nun §aaktiviert§7."
+    godmode-off:
+      self: "§7God-Mode ist nun §cdeaktiviert§7."
+      other: "§7God-Mode für %target% ist nun §cdeaktiviert§7."
 
 database:
   connection:

@@ -3,30 +3,30 @@ version: '1.0'
 main: de.dervonnebe.aps.APSurvival
 api-version: '1.21'
 author: dervonnebe
-description: Watch out Website
+description: Watch our Website
 website: https://dervonnebe.de/ap/survival
 commands:
     apsurvival:
-        description: Main command for AP-Survival
-        usage: /<command>
+        description: "Main command for AP-Survival"
+        usage: "/<command>"
         aliases:
             - aps
 
     gamemode:
-        description: Setze den Gamemode.
-        usage: /<command> <0,1,2,3,a,s,c,sp,survival,adventure,creative,spectator> [spieler]
+        description: "Setze den Gamemode."
+        usage: "/<command> <0,1,2,3,a,s,c,sp,survival,adventure,creative,spectator> [spieler]"
         aliases:
             - gm
 
     teleport:
-        description: Teleportiere dich zu einem Spieler.
-        usage: /<command> <spieler,location>
+        description: "Teleportiere dich zu einem Spieler."
+        usage: "/<command> <spieler,location>"
         aliases:
             - tp
 
     msg:
-        description: Sende eine private Nachricht.
-        usage: /<command> <spieler> <nachricht>
+        description: "Sende eine private Nachricht."
+        usage: "/<command> <spieler> <nachricht>"
         aliases:
             - m
             - tell
@@ -34,8 +34,8 @@ commands:
             - w
 
     reply:
-        description: Antworte auf eine private Nachricht.
-        usage: /<command> <nachricht>
+        description: "Antworte auf eine private Nachricht."
+        usage: "/<command> <nachricht>"
         aliases:
             - r
 
@@ -114,6 +114,12 @@ commands:
     fly:
         description: "Gebe dir die Power zum Fliegen oder entneheme sie dir wieder"
         usage: "/fly [player]"
+
+    godmode:
+        description: "Sei der unbesigbare auf dem ganzen Server"
+        usage: "/godmode [player]"
+        aliases:
+            - god
 
 permissions:
     aps.admin:

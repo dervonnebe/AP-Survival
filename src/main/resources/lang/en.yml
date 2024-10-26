@@ -96,6 +96,13 @@ command:
     fly-off:
       self: "§7You can no longer fly."
       to: "§f%target% §7can no longer fly."
+    godmode-on:
+      self: "§7God mode is now §aenabled§7."
+      other: "§7God mode for %target% is now §aenabled§7."
+    godmode-off:
+      self: "§7God mode is now §cdisabled§7."
+      other: "§7God mode for %target% is now §cdisabled§7."
+
 
 
 

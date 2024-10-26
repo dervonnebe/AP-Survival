@@ -132,6 +132,10 @@ public final class APSurvival extends JavaPlugin {
         getCommand("fly").setExecutor(flyCommand);
         getCommand("fly").setTabCompleter(flyCommand);
 
+        GodModeCommand godModeCommand = new GodModeCommand(this);
+        getCommand("godmode").setExecutor(godModeCommand);
+        getCommand("godmode").setTabCompleter(godModeCommand);
+
 
         log("Commands registered!");
     }
