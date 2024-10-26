@@ -60,4 +60,11 @@ public class Messages {
     public String getMessage(String key) {
         return getMessage(key, language);
     }
+
+    public void boradcastInvidualMessage(String key) {
+        for (Player player : plugin.getServer().getOnlinePlayers()) {
+            player.sendMessage(plugin.getPrefix() + getPlayerMessage(player, key));
+        }
+        plugin.getServer().getConsoleSender().sendMessage(plugin.getPrefix() + getMessage(key));
+    }
 }
