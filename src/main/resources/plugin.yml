@@ -129,6 +129,15 @@ commands:
             - stop
             - shutdown
 
+    broadcast:
+        description: "Sende eine Nachricht an alle Spieler."
+        usage: "/broadcast <nachricht> [-l LANG]"
+        aliases:
+            - alert
+            - bc
+
+
+
 permissions:
     aps.admin:
         description: "Permission for all admin commands"

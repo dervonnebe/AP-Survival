@@ -141,6 +141,9 @@ public final class APSurvival extends JavaPlugin {
         getCommand("reboot").setExecutor(rebootCommand);
         getCommand("reboot").setTabCompleter(rebootCommand);
 
+        BroadcastCommand broadcastCommand = new BroadcastCommand(this);
+        getCommand("broadcast").setExecutor(broadcastCommand);
+
 
         log("Commands registered!");
     }

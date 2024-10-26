@@ -112,8 +112,9 @@ command:
       now: "The server is rebooting now!"
       timer: "The server will reboot in %time% seconds. Please prepare for disconnection."
       kick: "You have been disconnected due to server reboot. Please rejoin shortly."
-
-
+    broadcast:
+      income-alert: "§aAttention Broadcast"
+      sent: "§7You have sent the following broadcast message to §f§l %language%. Message: %message%"
 
 database:
   connection:
