@@ -67,6 +67,12 @@ commands:
         description: "Aktiviere das automatische Akzeptieren von Teleportanfragen."
         usage: "/tpauto"
 
+    language:
+        description: "Ändere deine Sprache."
+        usage: "/language <language>"
+        aliases:
+            - lang
+
     day:
         description: "Setze die Zeit auf Tag."
         usage: "/day"

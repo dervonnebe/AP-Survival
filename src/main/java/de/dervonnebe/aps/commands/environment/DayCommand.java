@@ -23,10 +23,10 @@ public class DayCommand implements CommandExecutor {
 
         if (player.hasPermission("aps.command.day")) {
             player.getWorld().setTime(0);
-            player.sendMessage(plugin.getPrefix() + msg.getMessage("command.environment.day"));
+            player.sendMessage(plugin.getPrefix() + msg.getPlayerMessage(player, "command.environment.day"));
             return true;
         } else {
-            player.sendMessage(plugin.getPrefix() + msg.getMessage("command.no-perm").replace("%perm%", "aps.command.day"));
+            player.sendMessage(plugin.getPrefix() + msg.getPlayerMessage(player, "no-perm").replace("%perm%", "aps.command.day"));
         }
 
         return true;

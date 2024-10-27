@@ -36,7 +36,7 @@ public class GodModeCommand implements CommandExecutor, TabCompleter {
             if (player.hasPermission("aps.command.god")) {
                 toggleGodMode(player, player);
             } else {
-                player.sendMessage(plugin.getPrefix() + msg.getPlayerMessage(player, "command.no-perm").replace("%perm%", "aps.command.god"));
+                player.sendMessage(plugin.getPrefix() + msg.getPlayerMessage(player, "no-perm").replace("%perm%", "aps.command.god"));
             }
         } else if (args.length == 1) {
             if (player.hasPermission("aps.command.god.others")) {
@@ -47,7 +47,7 @@ public class GodModeCommand implements CommandExecutor, TabCompleter {
                 }
                 toggleGodMode(player, target);
             } else {
-                player.sendMessage(plugin.getPrefix() + msg.getPlayerMessage(player, "command.no-perm").replace("%perm%", "aps.command.god.others"));
+                player.sendMessage(plugin.getPrefix() + msg.getPlayerMessage(player, "no-perm").replace("%perm%", "aps.command.god.others"));
             }
         } else {
             player.sendMessage(plugin.getPrefix() + msg.getPlayerMessage(player, "command.invalid").replace("%command%", "/godmode [player]"));

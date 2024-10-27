@@ -38,13 +38,18 @@ public class Messages {
 
     private String getMessage(String key, String lang) {
         File langFile = new File(plugin.getDataFolder(), "lang/" + lang + ".yml");
-        FileConfiguration langConfig = YamlConfiguration.loadConfiguration(langFile);
 
         if (!langFile.exists()) {
             plugin.log("Language file not found: " + langFile.getName(), "WARNING");
-            langConfig = YamlConfiguration.loadConfiguration(new File(plugin.getDataFolder(), "lang/" + defaultLanguage + ".yml"));
+            langFile = new File(plugin.getDataFolder(), "lang/" + defaultLanguage + ".yml");
+
+            if (!langFile.exists()) {
+                plugin.log("Default language file not found: " + defaultLanguage + ".yml", "ERROR");
+                return "§4Message file not found!";
+            }
         }
 
+        FileConfiguration langConfig = YamlConfiguration.loadConfiguration(langFile);
         String message = langConfig.getString(key);
 
         if (message == null) {
@@ -61,11 +66,15 @@ public class Messages {
         return getMessage(key, language);
     }
 
-    public void broadcastIndividualMessage(String key, String[][] placeholders) {
+    public void broadcastIndividualMessage(String key, String[][] placeholders, Boolean... disablePrefix) {
         for (Player player : plugin.getServer().getOnlinePlayers()) {
             String message = getPlayerMessage(player, key);
             message = replacePlaceholders(message, placeholders);
-            player.sendMessage(plugin.getPrefix() + message);
+            if (disablePrefix.length > 0 && disablePrefix[0]) {
+                player.sendMessage(message);
+            } else {
+                player.sendMessage(plugin.getPrefix() + message);
+            }
         }
         String consoleMessage = replacePlaceholders(getMessage(key), placeholders);
         plugin.getServer().getConsoleSender().sendMessage(plugin.getPrefix() + consoleMessage);
@@ -82,5 +91,11 @@ public class Messages {
             }
         }
         return message;
+    }
+
+    public void clearPlayerChat(Player player, int lines) {
+        for (int i = 0; i < 300; i++) {
+            player.sendMessage("");
+        }
     }
 }

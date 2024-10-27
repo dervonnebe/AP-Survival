@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/AP-Survival.main.iml" filepath="$PROJECT_DIR$/.idea/modules/AP-Survival.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/de.dervonnebe.AP-Survival.main.iml" filepath="$PROJECT_DIR$/.idea/modules/de.dervonnebe.AP-Survival.main.iml" />
     </modules>
   </component>
 </project>

@@ -20,6 +20,11 @@ join-leaves:
     custom: true #If you want to use a custom join message, set this to true
     no-message: false #If you want to disable the join message, set this to true
     particle: true
+    clear-chat:
+      enabled: false
+      lines: 300
+      after-join: true # If you want to clear the chat after the join message, set this to true
+
     welcome:
       title: true
       subtitle: true

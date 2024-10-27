@@ -23,10 +23,10 @@ public class SunCommand implements CommandExecutor {
 
         if (player.hasPermission("aps.command.sun")) {
             player.getWorld().setClearWeatherDuration(1000);
-            player.sendMessage(plugin.getPrefix() + msg.getMessage("command.environment.sun"));
+            player.sendMessage(plugin.getPrefix() + msg.getPlayerMessage(player, "command.environment.sun"));
             return true;
         } else {
-            player.sendMessage(plugin.getPrefix() + msg.getMessage("command.no-perm").replace("%perm%", "aps.command.sun"));
+            player.sendMessage(plugin.getPrefix() + msg.getPlayerMessage(player, "no-perm").replace("%perm%", "aps.command.sun"));
         }
 
         return true;

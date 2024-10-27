@@ -36,7 +36,8 @@ public class BroadcastCommand implements CommandExecutor {
 
         String language = null;
         String message;
-        if (args[args.length - 2].equalsIgnoreCase("-l")) {
+
+        if (args.length >= 3 && args[args.length - 2].equalsIgnoreCase("-l")) {
             language = args[args.length - 1];
             message = String.join(" ", args).replace(" -l " + language, "");
         } else {

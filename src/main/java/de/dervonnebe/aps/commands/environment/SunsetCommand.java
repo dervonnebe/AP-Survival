@@ -23,10 +23,10 @@ public class SunsetCommand implements CommandExecutor {
 
         if (player.hasPermission("aps.command.sunset")) {
             player.getWorld().setTime(13000);
-            player.sendMessage(plugin.getPrefix() + msg.getMessage("command.environment.sunset"));
+            player.sendMessage(plugin.getPrefix() + msg.getPlayerMessage(player, "command.environment.sunset"));
             return true;
         } else {
-            player.sendMessage(plugin.getPrefix() + msg.getMessage("command.no-perm").replace("%perm%", "aps.command.sunset"));
+            player.sendMessage(plugin.getPrefix() + msg.getPlayerMessage(player, "no-perm").replace("%perm%", "aps.command.sunset"));
         }
 
         return true;

@@ -2,6 +2,8 @@
 # if you want to use a new line, use \n
 # if you want to use a & symbol, use \&
 
+# //TODO: Add all missing translations from the German language file
+
 no-perm: "&cYou do not have permission to do that. §8(§7%perm%§8)"
 
 join-leaves:
@@ -74,6 +76,11 @@ command:
   tpauto:
     enabled: "You have enabled automatic acceptance of teleport requests."
 
+  language:
+    changed: "§7The language has been set to §f§l%language%§7."
+    invalid: "§cInvalid language! Please use a valid language. §8(§7%language%§8)"
+    current: "§7Your current language is §f§l%language%§7."
+
   environment:
     day: "§7The time has been set to §f§lday§7."
     night: "§7The time has been set to §f§lnight§7."
@@ -82,6 +89,9 @@ command:
     sun: "§7The weather has been set to §f§lclear§7."
     rain: "§7The weather has been set to §f§lrain§7."
     thunder: "§7The weather has been set to §f§lthunderstorm§7."
+    time:
+      current: "§7The current time is: §f§l%time%"
+      set: "§7The time has been set to §f§l%time%§7."
 
   essential:
     heal: "§7You have been healed."

@@ -21,6 +21,7 @@ public class DatabaseManager {
     public DatabaseManager(APSurvival plugin) {
         this.plugin = plugin;
         this.msg = plugin.getMessages();
+        setup();
     }
 
     public void setup() {

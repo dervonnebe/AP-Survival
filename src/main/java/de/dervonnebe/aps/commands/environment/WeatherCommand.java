@@ -33,12 +33,12 @@ public class WeatherCommand implements CommandExecutor, TabCompleter {
         Player player = (Player) sender;
 
         if (!player.hasPermission("aps.command.weather")) {
-            player.sendMessage(plugin.getPrefix() + msg.getMessage("command.no-perm").replace("%perm%", "aps.command.weather"));
+            player.sendMessage(plugin.getPrefix() + msg.getPlayerMessage(player, "no-perm").replace("%perm%", "aps.command.weather"));
             return true;
         }
 
         if (args.length < 1) {
-            player.sendMessage(plugin.getPrefix() + msg.getMessage("command.invalid").replace("%command%", "/weather <clear | rain | thunder> [-w <world> | -t <time>]"));
+            player.sendMessage(plugin.getPrefix() + msg.getPlayerMessage(player, "command.invalid").replace("%command%", "/weather <clear | rain | thunder> [-w <world> | -t <time>]"));
             return true;
         }
 
@@ -57,7 +57,7 @@ public class WeatherCommand implements CommandExecutor, TabCompleter {
                     duration = Integer.parseInt(args[i + 1]);
                     i++;
                 } catch (NumberFormatException e) {
-                    player.sendMessage(plugin.getPrefix() + msg.getMessage("command.invalid-int").replace("%int%", args[i + 1]));
+                    player.sendMessage(plugin.getPrefix() + msg.getPlayerMessage(player, "command.invalid-int").replace("%int%", args[i + 1]));
                     return true;
                 }
             }
@@ -74,7 +74,7 @@ public class WeatherCommand implements CommandExecutor, TabCompleter {
                 setThunderWeather(player, worldName, duration);
                 break;
             default:
-                player.sendMessage(plugin.getPrefix() + msg.getMessage("command.invalid").replace("%command%", "/weather <clear | rain | thunder> [-w <world> | -t <time>]"));
+                player.sendMessage(plugin.getPrefix() + msg.getPlayerMessage(player, "command.invalid").replace("%command%", "/weather <clear | rain | thunder> [-w <world> | -t <time>]"));
                 break;
         }
         return true;
@@ -86,15 +86,15 @@ public class WeatherCommand implements CommandExecutor, TabCompleter {
                 player.getServer().getWorld(worldName).setClearWeatherDuration(duration);
                 player.getServer().getWorld(worldName).setStorm(false);
                 player.getServer().getWorld(worldName).setThundering(false);
-                player.sendMessage(plugin.getPrefix() + msg.getMessage("command.environment.sun"));
+                player.sendMessage(plugin.getPrefix() + msg.getPlayerMessage(player, "command.environment.sun"));
             } else {
-                player.sendMessage(plugin.getPrefix() + msg.getMessage("command.invalid-world").replace("%world%", worldName));
+                player.sendMessage(plugin.getPrefix() + msg.getPlayerMessage(player, "command.invalid-world").replace("%world%", worldName));
             }
         } else {
             player.getWorld().setClearWeatherDuration(duration);
             player.getWorld().setStorm(false);
             player.getWorld().setThundering(false);
-            player.sendMessage(plugin.getPrefix() + msg.getMessage("command.environment.sun"));
+            player.sendMessage(plugin.getPrefix() + msg.getPlayerMessage(player, "command.environment.sun"));
         }
     }
 
@@ -103,14 +103,14 @@ public class WeatherCommand implements CommandExecutor, TabCompleter {
             if (player.getServer().getWorld(worldName) != null) {
                 player.getServer().getWorld(worldName).setStorm(true);
                 player.getServer().getWorld(worldName).setWeatherDuration(duration);
-                player.sendMessage(plugin.getPrefix() + msg.getMessage("command.environment.rain"));
+                player.sendMessage(plugin.getPrefix() + msg.getPlayerMessage(player, "command.environment.rain"));
             } else {
-                player.sendMessage(plugin.getPrefix() + msg.getMessage("command.invalid-world").replace("%world%", worldName));
+                player.sendMessage(plugin.getPrefix() + msg.getPlayerMessage(player, "command.invalid-world").replace("%world%", worldName));
             }
         } else {
             player.getWorld().setStorm(true);
             player.getWorld().setWeatherDuration(duration);
-            player.sendMessage(plugin.getPrefix() + msg.getMessage("command.environment.rain"));
+            player.sendMessage(plugin.getPrefix() + msg.getPlayerMessage(player, "command.environment.rain"));
         }
     }
 
@@ -119,14 +119,14 @@ public class WeatherCommand implements CommandExecutor, TabCompleter {
             if (player.getServer().getWorld(worldName) != null) {
                 player.getServer().getWorld(worldName).setThundering(true);
                 player.getServer().getWorld(worldName).setWeatherDuration(duration);
-                player.sendMessage(plugin.getPrefix() + msg.getMessage("command.environment.thunder"));
+                player.sendMessage(plugin.getPrefix() + msg.getPlayerMessage(player, "command.environment.thunder"));
             } else {
-                player.sendMessage(plugin.getPrefix() + msg.getMessage("command.invalid-world").replace("%world%", worldName));
+                player.sendMessage(plugin.getPrefix() + msg.getPlayerMessage(player, "command.invalid-world").replace("%world%", worldName));
             }
         } else {
             player.getWorld().setThundering(true);
             player.getWorld().setWeatherDuration(duration);
-            player.sendMessage(plugin.getPrefix() + msg.getMessage("command.environment.thunder"));
+            player.sendMessage(plugin.getPrefix() + msg.getPlayerMessage(player, "command.environment.thunder"));
         }
     }
 

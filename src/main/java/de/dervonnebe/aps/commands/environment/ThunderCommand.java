@@ -23,10 +23,10 @@ public class ThunderCommand implements CommandExecutor {
 
         if (player.hasPermission("aps.command.thunder") || player.hasPermission("aps.command.storm")) {
             player.getWorld().setThundering(true);
-            player.sendMessage(plugin.getPrefix() + msg.getMessage("command.environment.thunder"));
+            player.sendMessage(plugin.getPrefix() + msg.getPlayerMessage(player, "command.environment.thunder"));
             return true;
         } else {
-            player.sendMessage(plugin.getPrefix() + msg.getMessage("command.no-perm").replace("%perm%", "aps.command.thunder / aps.command.storm"));
+            player.sendMessage(plugin.getPrefix() + msg.getPlayerMessage(player, "no-perm").replace("%perm%", "aps.command.thunder / aps.command.storm"));
         }
 
         return true;

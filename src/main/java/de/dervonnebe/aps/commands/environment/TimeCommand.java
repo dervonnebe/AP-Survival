@@ -32,7 +32,7 @@ public class TimeCommand implements CommandExecutor, TabCompleter {
         Player player = (Player) sender;
 
         if (!player.hasPermission("aps.command.time")) {
-            player.sendMessage(plugin.getPrefix() + msg.getMessage("command.no-perm").replace("%perm%", "aps.command.time"));
+            player.sendMessage(plugin.getPrefix() + msg.getPlayerMessage(player, "no-perm").replace("%perm%", "aps.command.time"));
             return true;
         }
 
@@ -65,28 +65,28 @@ public class TimeCommand implements CommandExecutor, TabCompleter {
     private void setTimeIfPermitted(Player player, long time, String perm, String messageKey) {
         if (player.hasPermission(perm)) {
             player.getWorld().setTime(time);
-            player.sendMessage(plugin.getPrefix() + msg.getMessage(messageKey));
+            player.sendMessage(plugin.getPrefix() + msg.getPlayerMessage(player, messageKey));
         } else {
-            player.sendMessage(plugin.getPrefix() + msg.getMessage("command.no-perm").replace("%perm%", perm));
+            player.sendMessage(plugin.getPrefix() + msg.getPlayerMessage(player, "no-perm").replace("%perm%", perm));
         }
     }
 
     private void setCustomTime(Player player, String timeArg) {
         if (!player.hasPermission("aps.command.time.set")) {
-            player.sendMessage(plugin.getPrefix() + msg.getMessage("command.no-perm").replace("%perm%", "aps.command.time.set"));
+            player.sendMessage(plugin.getPrefix() + msg.getPlayerMessage(player, "no-perm").replace("%perm%", "aps.command.time.set"));
             return;
         }
         try {
             long time = Long.parseLong(timeArg);
             player.getWorld().setTime(time);
-            player.sendMessage(plugin.getPrefix() + msg.getMessage("command.environment.time.set").replace("%time%", String.valueOf(time)));
+            player.sendMessage(plugin.getPrefix() + msg.getPlayerMessage(player, "command.environment.time.set").replace("%time%", String.valueOf(time)));
         } catch (NumberFormatException e) {
-            player.sendMessage(plugin.getPrefix() + msg.getMessage("command.invalid").replace("%command%", "/time <day|night|sunset|sunrise|<time>>"));
+            player.sendMessage(plugin.getPrefix() + msg.getPlayerMessage(player, "command.invalid").replace("%command%", "/time <day|night|sunset|sunrise|<time>>"));
         }
     }
 
     private void sendCurrentTime(Player player) {
-        player.sendMessage(plugin.getPrefix() + msg.getMessage("command.environment.time.current").replace("%time%", String.valueOf(player.getWorld().getTime())));
+        player.sendMessage(plugin.getPrefix() + msg.getPlayerMessage(player, "command.environment.time.current").replace("%time%", String.valueOf(player.getWorld().getTime())));
     }
 
     @Override

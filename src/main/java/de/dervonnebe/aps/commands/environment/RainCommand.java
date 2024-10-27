@@ -23,10 +23,10 @@ public class RainCommand implements CommandExecutor {
 
         if (player.hasPermission("aps.command.rain")) {
             player.getWorld().setStorm(true);
-            player.sendMessage(plugin.getPrefix() + msg.getMessage("command.environment.rain"));
+            player.sendMessage(plugin.getPrefix() + msg.getPlayerMessage(player, "command.environment.rain"));
             return true;
         } else {
-            player.sendMessage(plugin.getPrefix() + msg.getMessage("command.no-perm").replace("%perm%", "aps.command.rain"));
+            player.sendMessage(plugin.getPrefix() + msg.getPlayerMessage(player, "no-perm").replace("%perm%", "aps.command.rain"));
         }
 
         return true;

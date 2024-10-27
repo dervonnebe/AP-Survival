@@ -20,64 +20,70 @@ join-leaves:
 command:
   # Command Fehlermeldungen
   player-not-found: "§cSpieler nicht gefunden! §8(§7%player%§8)"
-  only-players: "Dieser Befehl kann nur von Spielern ausgeführt werden."
-  invalid: "Ungültiger Befehl! Bitte benutze %command%."
-  invalid-int: "Ungültige Zahl! Bitte benutze eine gültige Zahl. §8(§7%int%§8)"
-  invalid-world: "Ungültige Welt! Bitte benutze eine gültige Welt. §8(§7%world%§8)"
+  only-players: "§cDieser Befehl kann nur von Spielern ausgeführt werden."
+  invalid: "§cUngültiger Befehl! Bitte benutze §7%command%§c."
+  invalid-int: "§cUngültige Zahl! Bitte benutze eine gültige Zahl. §8(§7%int%§8)"
+  invalid-world: "§cUngültige Welt! Bitte benutze eine gültige Welt. §8(§7%world%§8)"
 
   # Command Nachrichten
   gamemode:
-    current-gamemode: "Ihr aktueller Spielmodus ist: %gamemode%"
-    change: "Ihr Spielmodus wurde auf %gamemode% geändert."
-    change-other: "%target% wurde auf den Spielmodus %gamemode% geändert."
-    invalid-gamemode: "Ungültiger Spielmodus! Bitte benutze einen gültigen Gamemode."
+    current-gamemode: "§7Ihr aktueller Spielmodus ist: §f§l%gamemode%"
+    change: "§7Ihr Spielmodus wurde auf §f§l%gamemode%§7 geändert."
+    change-other: "§f§l%target%§7 wurde auf den Spielmodus §f§l%gamemode%§7 geändert."
+    invalid-gamemode: "§cUngültiger Spielmodus! Bitte benutze einen gültigen Gamemode."
 
   msg:
-    no-reply: "Du hast niemanden, an den du antworten kannst."
+    no-reply: "§7Du hast niemanden, an den du antworten kannst."
     cannot-receive: "&cDieser Spieler kann keine Nachrichten empfangen."
     format:
-      sender: "§7[Du -> §f%target%§7]: §f%message%"
-      receiver: "§7[§f%sender%§7 -> Dir]: §f%message%"
+      sender: "§8[§4§lDu §7-> §f%target%§8]§7: §f%message%"
+      receiver: "§8[§f%sender%§7 -> §4§lDir§8]§7: §f%message%"
 
   msgtoggle:
-    on: "Du hast alle privaten Nachrichten deaktiviert."
-    off: "Du hast alle privaten Nachrichten aktiviert."
+    on: "§7Du hast alle privaten Nachrichten §a§laktiviert§7."
+    off: "§7Du hast alle privaten Nachrichten §c§ldeaktiviert§7."
     player:
-      blocked: "Du hast Nachrichten von %player% blockiert."
-      not-blocked: "Du hast Nachrichten von %player% nicht blockiert."
-      on: "Du hast Nachrichten von %player% wieder aktiviert."
-      off: "Du hast Nachrichten von %player% deaktiviert."
+      blocked: "§7Du hast Nachrichten von §f§l%player%§7 blockiert."
+      not-blocked: "§7Du hast Nachrichten von §f§l%player%§7 nicht blockiert."
+      on: "§7Du hast Nachrichten von §f§l%player%§7 wieder §a§laktiviert§7."
+      off: "§7Du hast Nachrichten von §f§l%player%§7 §c§ldeaktiviert§7."
       temp:
-        on: "Du hast Nachrichten von %player% für %duration% blockiert."
-        off: "Du kannst nun wieder Nachrichten von %player% erhalten."
+        on: "§7Du hast Nachrichten von §f§l%player%§7 für §f§l%duration% Sekunden§7 blockiert."
+        off: "§7Du kannst nun wieder Nachrichten von §f§l%player%§7 erhalten."
     temp:
-      on: "Du hast alle Nachrichten für %duration% blockiert."
-      off: "Du kannst jetzt wieder private Nachrichten erhalten."
+      on: "§7Du hast alle Nachrichten für §f§l%duration%§7 blockiert."
+      off: "§7Du kannst jetzt wieder private Nachrichten erhalten."
 
   tpa:
-    request: "%player% möchte sich zu dir teleportieren. %btn-accept% %btn-decline%"
+    request: "§f§l%player%§7 möchte sich zu dir teleportieren. %btn-accept% %btn-decline%"
+    sent: "§7Du hast eine Teleportanfrage an §f§l%target% gesendet."
 
   tpall:
-    success: "Alle Spieler wurden zu dir teleportiert."
+    success: "§7Alle Spieler wurden zu dir teleportiert."
 
   tpaall:
-    sent: "Du hast Teleportanfragen an alle Online-Spieler gesendet."
+    sent: "§7Du hast Teleportanfragen an alle Online-Spieler gesendet."
 
   tpahere:
-    sent: "Du hast eine Teleportanfrage an %target% gesendet."
+    sent: "§7Du hast eine Teleportanfrage an §f§l%target%§7 gesendet."
 
   tpacancel:
-    no-request: "Es gibt keine ausstehende Anfrage."
-    success: "Die Teleportanfrage an %target% wurde storniert."
-    all-cancelled: "Alle ausstehenden Teleportanfragen wurden storniert."
+    no-request: "§7Es gibt keine ausstehende Anfrage."
+    success: "§7Die Teleportanfrage an §f§l%target%§7 wurde storniert."
+    all-cancelled: "§7Alle ausstehenden Teleportanfragen wurden storniert."
 
   tpaccept:
-    success: "%player% hat deine Teleportanfrage akzeptiert."
-    no-request: "Es gibt keine ausstehende Anfrage, die akzeptiert werden kann."
+    success: "§f§l%player%§7 hat deine Teleportanfrage akzeptiert."
+    no-request: "§7Es gibt keine ausstehende Anfrage, die akzeptiert werden kann."
 
   tpauto:
-    enabled: "Du hast das automatische Akzeptieren von Teleportanfragen aktiviert."
-    sucsess: "Du hast die Teleportanfrage von %player% automatisch angenommen"
+    enabled: "§7Du hast das automatische Akzeptieren von Teleportanfragen aktiviert."
+    sucsess: "§7Du hast die Teleportanfrage von §f§l%player%§7 automatisch angenommen"
+
+  language:
+    changed: "§7Deine Sprache wurde auf §f§l%language% §7geändert."
+    invalid: "§cUngültige Sprache! Bitte benutze eine gültige Sprache."
+    current: "§7Deine aktuelle Sprache ist §f§l%language%§7."
 
   environment:
     day: "§7Die Zeit wurde auf §f§lTag§7 gesetzt."
@@ -106,31 +112,31 @@ command:
       to: "§f%target% §7kann nicht mehr fliegen."
     godmode-on:
       self: "§7God-Mode ist nun §aaktiviert§7."
-      other: "§7God-Mode für %target% ist nun §aaktiviert§7."
+      other: "§7God-Mode für §f§l%target%§7 ist nun §aaktiviert§7."
     godmode-off:
       self: "§7God-Mode ist nun §cdeaktiviert§7."
-      other: "§7God-Mode für %target% ist nun §cdeaktiviert§7."
+      other: "§7God-Mode für §f§l%target%§7 ist nun §cdeaktiviert§7."
 
   reboot:
-    invalid-time: "Die angegebene Zeit ist ungültig. Bitte geben Sie eine positive Zahl ein."
-    time-out-of-range: "Die angegebene Zeit liegt außerhalb des erlaubten Bereichs. Erlaubter Bereich: %min-time% bis %max-time% Sekunden."
+    invalid-time: "§cDie angegebene Zeit ist ungültig. Bitte geben Sie eine positive Zahl ein."
+    time-out-of-range: "§cDie angegebene Zeit liegt außerhalb des erlaubten Bereichs. Erlaubter Bereich: §7%min-time%§c bis §7%max-time% Sekunden§c."
 
   server:
     reboot:
-      now: "Der Server startet jetzt neu!"
-      timer: "Der Server wird in %time% Sekunden neu starten. Bitte bereiten Sie sich auf die Trennung vor."
-      kick: "Sie wurden aufgrund eines Server-Neustarts getrennt. Bitte verbinden Sie sich in Kürze erneut."
+      now: "§7Der Server startet jetzt neu!"
+      timer: "§7Der Server wird in §f§l%time%§7 Sekunden neu starten. Bitte bereiten Sie sich auf die Trennung vor."
+      kick: "§7Sie wurden aufgrund eines Server-Neustarts getrennt. Bitte verbinden Sie sich in Kürze erneut."
     broadcast:
       income-alert: "§aAchtung Broadcast"
-      sent: "§7Du hast folgende Broadcast nachricht an §f§l %language% gesendet. Nachricht: %message%"
+      sent: "§7Du hast folgende Broadcast nachricht an §f§l%language%§7 gesendet. Nachricht:§8 %message%"
 
 database:
   connection:
-    success: "Die Verbindung zur Datenbank wurde erfolgreich hergestellt. §8[§7%type%§8]"
-    error: "Fehler beim Verbinden zu %type%: %error%"
-    closed: "Die Verbindung zur Datenbank wurde geschlossen."
-    query-error: "Fehler beim Ausführen der Abfrage: %error% §8[§7%query%§8]"
+    success: "§7Die Verbindung zur Datenbank wurde erfolgreich hergestellt. §8[§7%type%§8]"
+    error: "§7Fehler beim Verbinden zu §f§l%type%§7:§c %error%"
+    closed: "§7Die Verbindung zur Datenbank wurde geschlossen."
+    query-error: "§cFehler beim Ausführen der Abfrage: %error% §8[§7%query%§8]"
   setup:
     tables:
-      success: "Die Tabellen wurden erfolgreich erstellt."
-      error: "Fehler beim Erstellen der Tabellen: %error%"
+      success: "§7Die Tabellen wurden erfolgreich erstellt."
+      error: "§cFehler beim Erstellen der Tabellen:§f %error%"

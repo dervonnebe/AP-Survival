@@ -28,7 +28,7 @@ public class RebootCommand implements CommandExecutor, TabCompleter {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         int time = parseTimeArgument(sender, args);
-        if (time == -1) return true;
+        if (time == -1) time = 0;
 
         if (!isValidTime(sender, time)) return true;
 
@@ -79,24 +79,24 @@ public class RebootCommand implements CommandExecutor, TabCompleter {
     }
 
     private void initiateImmediateReboot() {
-        msg.broadcastIndividualMessage("server.reboot.now", new String[][] {
-                {"%time%", "0"},
+        msg.broadcastIndividualMessage("command.server.reboot.now", new String[][] {
+                {"%time%", "%time% is not nessesary for this message to be displayed"},
                 {"%test%", "§a§lThis is an Secret §k§4HACKER§7"}
         });
         Bukkit.getOnlinePlayers().forEach(player ->
-                player.kickPlayer(msg.getPlayerMessage(player, "server.reboot.kick")));
+                player.kickPlayer(msg.getPlayerMessage(player, "command.server.reboot.kick")));
         Bukkit.shutdown();
     }
 
     private void scheduleReboot(int time) {
-        msg.broadcastIndividualMessage("server.reboot.timer", new String[][] {
+        msg.broadcastIndividualMessage("command.server.reboot.timer", new String[][] {
                 {"%time%", String.valueOf(time)},
                 {"%test%", "§a§lThis is an Secret §k§4HACKER§7"}
         });
 
         Bukkit.getScheduler().runTaskLater(plugin, () ->
                 Bukkit.getOnlinePlayers().forEach(player ->
-                        player.kickPlayer(msg.getPlayerMessage(player, "server.reboot.kick"))), time * 20L);
+                        player.kickPlayer(msg.getPlayerMessage(player, "command.server.reboot.kick"))), time * 20L);
 
         Bukkit.getScheduler().runTaskLater(plugin, Bukkit::shutdown, time * 20L);
     }

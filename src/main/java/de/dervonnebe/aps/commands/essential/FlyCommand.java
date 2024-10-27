@@ -39,7 +39,7 @@ public class FlyCommand implements CommandExecutor, TabCompleter {
             if (player.hasPermission("aps.command.fly")) {
                 toggleFlight(player, player);
             } else {
-                player.sendMessage(plugin.getPrefix() + msg.getMessage("command.no-perm").replace("%perm%", "aps.command.fly"));
+                player.sendMessage(plugin.getPrefix() + msg.getPlayerMessage(player, "no-perm").replace("%perm%", "aps.command.fly"));
             }
             return true;
         }

@@ -3,6 +3,7 @@ package de.dervonnebe.aps.events;
 import de.dervonnebe.aps.APSurvival;
 import de.dervonnebe.aps.utils.ConfigManager;
 import de.dervonnebe.aps.utils.DatabaseManager;
+import de.dervonnebe.aps.utils.Messages;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -17,6 +18,7 @@ import java.time.format.DateTimeFormatter;
 public class JoinQuitEvent implements Listener {
 
     private final APSurvival plugin;
+    private final Messages msg;
     private final ConfigManager configManager;
     private DatabaseManager databaseManager;
 
@@ -24,11 +26,18 @@ public class JoinQuitEvent implements Listener {
         this.plugin = plugin;
         this.configManager = plugin.getConfigManager();
         this.databaseManager = plugin.getDatabaseManager();
+        this.msg = plugin.getMessages();
     }
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
+
+        if (plugin.getDebug() && player.hasPermission("aps.debug.notify")) {
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+            LocalDateTime now = LocalDateTime.now();
+            player.sendMessage("§7" + dtf.format(now) + "§8 - §e" + "DEBUG mode is enabled.");
+        }
 
         // Add User to Database if not already in
         databaseManager.executeUpdate("INSERT OR IGNORE INTO users (uuid, username) VALUES ('" + player.getUniqueId() + "', '" + player.getName() + "')");
@@ -37,11 +46,19 @@ public class JoinQuitEvent implements Listener {
             player.getWorld().spawnParticle(Particle.HAPPY_VILLAGER, player.getLocation(), 100, 0.5, 0.5, 0.5, 0.1);
         }
 
+        if (configManager.getBoolean("join-leaves.join.clear-chat.enabled") && !configManager.getBoolean("join-leaves.join.clear-chat.after-join")) {
+            msg.clearPlayerChat(player, configManager.getInt("join-leaves.join.clear-chat.lines"));
+        }
+
         if (configManager.getBoolean("join-leaves.join.custom") && !configManager.getBoolean("join-leaves.join.no-message")) {
             event.setJoinMessage(null);
-            sendEveryPlayerCustomMessageFromKey("join-leaves.join");
+            msg.broadcastIndividualMessage("join-leaves.join", new String[][] {{"%player%", player.getName()}}, true);
         } else if (configManager.getBoolean("join-leaves.join.no-message")) {
             event.setJoinMessage(null);
+        }
+
+        if (configManager.getBoolean("join-leaves.join.clear-chat.enabled") && configManager.getBoolean("join-leaves.join.clear-chat.after-join")) {
+            msg.clearPlayerChat(player, configManager.getInt("join-leaves.join.clear-chat.lines"));
         }
 
         if (configManager.getBoolean("join-leaves.join.welcome.title")) {
@@ -76,32 +93,18 @@ public class JoinQuitEvent implements Listener {
 
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event) {
+        Player player = event.getPlayer();
         if (configManager.getBoolean("join-leaves.leave.particle")) {
-            Player player = event.getPlayer();
             player.getWorld().spawnParticle(Particle.LARGE_SMOKE, player.getLocation(), 10);
             player.getWorld().playSound(player.getLocation(), Sound.ENTITY_GENERIC_EXPLODE, 0.4F, 1.1F);
         }
 
         if (configManager.getBoolean("join-leaves.leave.custom") && !configManager.getBoolean("join-leaves.leave.no-message")) {
             event.setQuitMessage(null);
-            sendEveryPlayerCustomMessageFromKey("join-leaves.leave");
+            msg.broadcastIndividualMessage("join-leaves.leave", new String[][] {{"%player%", player.getName()}}, true);
         } else if (configManager.getBoolean("join-leaves.leave.no-message")) {
             event.setQuitMessage(null);
         }
 
-    }
-
-    private void sendEveryPlayerCustomMessageFromKey(String key) {
-        plugin.getServer().getOnlinePlayers().forEach(player -> {
-            String message = plugin.getMessages().getPlayerMessage(player, key);
-            if (message != null) {
-                LocalDateTime now = LocalDateTime.now();
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
-                String formattedDate = now.format(formatter);
-                message.replace("%player%", player.getName());
-                message.replace("%date%", formattedDate);
-                player.sendMessage(message);
-            }
-        });
     }
 }

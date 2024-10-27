@@ -36,27 +36,27 @@ public class HealCommand implements CommandExecutor, TabCompleter {
             if (player.hasPermission("aps.command.heal")) {
                 player.setHealth(20);
                 player.setFoodLevel(20);
-                player.sendMessage(plugin.getPrefix() + msg.getMessage("command.essential.heal"));
+                player.sendMessage(plugin.getPrefix() + msg.getPlayerMessage(player, "command.essential.heal"));
                 return true;
             } else {
-                player.sendMessage(plugin.getPrefix() + msg.getMessage("command.no-perm").replace("%perm%", "aps.command.heal"));
+                player.sendMessage(plugin.getPrefix() + msg.getPlayerMessage(player, "no-perm").replace("%perm%", "aps.command.heal"));
             }
         } else {
             if (player.hasPermission("aps.command.heal.other")) {
                 Player target = plugin.getServer().getPlayer(strings[0]);
 
                 if (target == null) {
-                    player.sendMessage(plugin.getPrefix() + msg.getMessage("command.no-player-found").replace("%player%", strings[0]));
+                    player.sendMessage(plugin.getPrefix() + msg.getPlayerMessage(player, "command.no-player-found").replace("%player%", strings[0]));
                     return true;
                 }
 
                 target.setHealth(20);
                 target.setFoodLevel(20);
-                target.sendMessage(plugin.getPrefix() + msg.getMessage("command.essential.heal-from").replace("%player%", player.getName()));
-                player.sendMessage(plugin.getPrefix() + msg.getMessage("command.essential.heal-other").replace("%player%", target.getName()));
+                target.sendMessage(plugin.getPrefix() + msg.getPlayerMessage(player, "command.essential.heal-from").replace("%player%", player.getName()));
+                player.sendMessage(plugin.getPrefix() + msg.getPlayerMessage(player, "command.essential.heal-other").replace("%player%", target.getName()));
                 return true;
             } else {
-                player.sendMessage(plugin.getPrefix() + msg.getMessage("command.no-perm").replace("%perm%", "aps.command.heal.other"));
+                player.sendMessage(plugin.getPrefix() + msg.getPlayerMessage(player, "no-perm").replace("%perm%", "aps.command.heal.other"));
             }
         }
 

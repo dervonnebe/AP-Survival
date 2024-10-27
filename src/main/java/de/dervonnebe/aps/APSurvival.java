@@ -13,6 +13,8 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class APSurvival extends JavaPlugin {
+    @Getter
+    private Boolean debug = true; // Diese einstellung sollte auf false gesetzt werden, wenn das Plugin auf einem Produktivsystem läuft
 
     @Getter
     String prefix;
@@ -31,18 +33,22 @@ public final class APSurvival extends JavaPlugin {
     @Getter
     DatabaseSetup databaseSetup;
 
+    LanguageManager languageManager;
+
     @Override
     public void onEnable() {
-        log("Starting APSurvival...");
         instance = this;
-        messages = new Messages(this);
-        dataManager = new PersistentDataManager(this);
         configManager = new ConfigManager(this);
+        prefix = configManager.getString("prefix");
+        languageManager = new LanguageManager(this, debug, new String[]{"de.yml", "en.yml"});
+        messages = new Messages(this);
+        log("Starting APSurvival...");
+        if (debug) log("Debug mode is enabled!", "WARNING");
+        dataManager = new PersistentDataManager(this);
         tpa = new TPA(this);
         databaseManager = new DatabaseManager(this);
-        prefix = configManager.getString("prefix");
 
-        setupDatabase(true);
+        setupDatabase(debug);
         registerCommands();
         registerEvents();
         registerBStats();
@@ -144,6 +150,9 @@ public final class APSurvival extends JavaPlugin {
         BroadcastCommand broadcastCommand = new BroadcastCommand(this);
         getCommand("broadcast").setExecutor(broadcastCommand);
 
+        LanguageCommand languageCommand = new LanguageCommand(this);
+        getCommand("language").setExecutor(languageCommand);
+
 
         log("Commands registered!");
     }
@@ -160,7 +169,7 @@ public final class APSurvival extends JavaPlugin {
 
     private void registerBStats() {
         log("Registering bStats...");
-        if (configManager.getBoolean("bstats")) {
+        if (!configManager.getBoolean("bstats")) {
             log("bStats is disabled in the config. Skipping registration!");
             return;
         }

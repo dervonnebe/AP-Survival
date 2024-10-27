@@ -36,27 +36,27 @@ public class FeedCommand implements CommandExecutor, TabCompleter {
             if (player.hasPermission("aps.command.feed")) {
                 player.setFoodLevel(20);
                 player.setSaturation(20);
-                player.sendMessage(plugin.getPrefix() + msg.getMessage("command.essential.feed"));
+                player.sendMessage(plugin.getPrefix() + msg.getPlayerMessage(player, "command.essential.feed"));
                 return true;
             } else {
-                player.sendMessage(plugin.getPrefix() + msg.getMessage("command.no-perm").replace("%perm%", "aps.command.feed"));
+                player.sendMessage(plugin.getPrefix() + msg.getPlayerMessage(player, "no-perm").replace("%perm%", "aps.command.feed"));
             }
         } else {
             if (player.hasPermission("aps.command.feed.other")) {
                 Player target = plugin.getServer().getPlayer(args[0]);
 
                 if (target == null) {
-                    player.sendMessage(plugin.getPrefix() + msg.getMessage("command.no-player-found").replace("%player%", args[0]));
+                    player.sendMessage(plugin.getPrefix() + msg.getPlayerMessage(player, "command.no-player-found").replace("%player%", args[0]));
                     return true;
                 }
 
                 target.setFoodLevel(20);
                 target.setSaturation(20);
-                target.sendMessage(plugin.getPrefix() + msg.getMessage("command.essential.feed-from").replace("%player%", player.getName()));
-                player.sendMessage(plugin.getPrefix() + msg.getMessage("command.essential.feed-other").replace("%player%", target.getName()));
+                target.sendMessage(plugin.getPrefix() + msg.getPlayerMessage(player, "command.essential.feed-from").replace("%player%", player.getName()));
+                player.sendMessage(plugin.getPrefix() + msg.getPlayerMessage(player, "command.essential.feed-other").replace("%player%", target.getName()));
                 return true;
             } else {
-                player.sendMessage(plugin.getPrefix() + msg.getMessage("command.no-perm").replace("%perm%", "aps.command.feed.other"));
+                player.sendMessage(plugin.getPrefix() + msg.getPlayerMessage(player, "no-perm").replace("%perm%", "aps.command.feed.other"));
             }
         }
 

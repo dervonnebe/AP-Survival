@@ -23,10 +23,10 @@ public class NightCommand implements CommandExecutor {
 
         if (player.hasPermission("aps.command.night")) {
             player.getWorld().setTime(13000);
-            player.sendMessage(plugin.getPrefix() + msg.getMessage("command.environment.night"));
+            player.sendMessage(plugin.getPrefix() + msg.getPlayerMessage(player, "command.environment.night"));
             return true;
         } else {
-            player.sendMessage(plugin.getPrefix() + msg.getMessage("command.no-perm").replace("%perm%", "aps.command.night"));
+            player.sendMessage(plugin.getPrefix() + msg.getPlayerMessage(player, "no-perm").replace("%perm%", "aps.command.night"));
         }
 
 

@@ -23,15 +23,24 @@ public class DatabaseSetup {
 
     public void setupTables(boolean rebuild) {
         Connection connection = databaseManager.getConnection();
+        if (connection == null) {
+            plugin.log(msg.getMessage("database.setup.tables.error").replace("%error%", "No connection to database, trying to reconnect..."), "ERROR");
+            databaseManager.setup();
+            if (connection != null) {
+                plugin.log(msg.getMessage("database.setup.tables.error").replace("%error%", "Reconnected to database, trying to setup tables again..."), "ERROR");
+                setupTables(rebuild);
+            }
+            return; // Return early if there is no connection
+        }
         try (Statement stmt = connection.createStatement()) {
             if (rebuild) {
-                stmt.execute("DROP TABLE IF EXISTS messages_toggles");
-                stmt.execute("DROP TABLE IF EXISTS users");
-                stmt.execute("DROP TABLE IF EXISTS reports");
-                stmt.execute("DROP TABLE IF EXISTS bans");
-                stmt.execute("DROP TABLE IF EXISTS warns");
-                stmt.execute("DROP TABLE IF EXISTS server_stats");
-                stmt.execute("DROP TABLE IF EXISTS command_log");
+                stmt.execute("DROP TABLE IF EXISTS messages_toggles;");
+                stmt.execute("DROP TABLE IF EXISTS users;");
+                stmt.execute("DROP TABLE IF EXISTS reports;");
+                stmt.execute("DROP TABLE IF EXISTS bans;");
+                stmt.execute("DROP TABLE IF EXISTS warns;");
+                stmt.execute("DROP TABLE IF EXISTS server_stats;");
+                stmt.execute("DROP TABLE IF EXISTS command_log;");
             }
 
             // Tabelle für Nachrichten-Toggles erstellen
@@ -41,7 +50,7 @@ public class DatabaseSetup {
                     "toggle_name TEXT NOT NULL, " +
                     "is_enabled BOOLEAN NOT NULL, " +
                     "FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE, " +
-                    "UNIQUE (user_id, toggle_name) -- Ensure unique toggle per user/target" +
+                    "UNIQUE (user_id, toggle_name)" + // Ensures unique toggle per user/target
                     ");");
 
             // Tabelle für Benutzerstatistiken erstellen
@@ -53,7 +62,8 @@ public class DatabaseSetup {
                     "last_join DATETIME DEFAULT CURRENT_TIMESTAMP, " +
                     "bans INTEGER DEFAULT 0, " +
                     "kicks INTEGER DEFAULT 0, " +
-                    "warns INTEGER DEFAULT 0)");
+                    "warns INTEGER DEFAULT 0" +
+                    ");");
 
             // Tabelle für Spielerberichte erstellen
             stmt.execute("CREATE TABLE IF NOT EXISTS reports (" +
@@ -61,7 +71,8 @@ public class DatabaseSetup {
                     "reported_user_id INTEGER NOT NULL, " +
                     "report_time DATETIME DEFAULT CURRENT_TIMESTAMP, " +
                     "description TEXT NOT NULL, " +
-                    "FOREIGN KEY (reported_user_id) REFERENCES users(id))");
+                    "FOREIGN KEY (reported_user_id) REFERENCES users(id)" +
+                    ");");
 
             // Tabelle für Banns erstellen
             stmt.execute("CREATE TABLE IF NOT EXISTS bans (" +
@@ -69,7 +80,8 @@ public class DatabaseSetup {
                     "user_id INTEGER NOT NULL, " +
                     "ban_time DATETIME DEFAULT CURRENT_TIMESTAMP, " +
                     "reason TEXT NOT NULL, " +
-                    "FOREIGN KEY (user_id) REFERENCES users(id))");
+                    "FOREIGN KEY (user_id) REFERENCES users(id)" +
+                    ");");
 
             // Tabelle für Warns erstellen
             stmt.execute("CREATE TABLE IF NOT EXISTS warns (" +
@@ -77,13 +89,15 @@ public class DatabaseSetup {
                     "user_id INTEGER NOT NULL, " +
                     "warn_time DATETIME DEFAULT CURRENT_TIMESTAMP, " +
                     "reason TEXT NOT NULL, " +
-                    "FOREIGN KEY (user_id) REFERENCES users(id))");
+                    "FOREIGN KEY (user_id) REFERENCES users(id)" +
+                    ");");
 
             // Tabelle für Serverstatistiken erstellen
             stmt.execute("CREATE TABLE IF NOT EXISTS server_stats (" +
                     "stat_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     "stat_name TEXT NOT NULL, " +
-                    "stat_value TEXT NOT NULL)");
+                    "stat_value TEXT NOT NULL" +
+                    ");");
 
             // Tabelle für Befehlsprotokolle erstellen
             stmt.execute("CREATE TABLE IF NOT EXISTS command_log (" +
@@ -91,7 +105,8 @@ public class DatabaseSetup {
                     "user_id INTEGER NOT NULL, " +
                     "command TEXT NOT NULL, " +
                     "timestamp DATETIME DEFAULT CURRENT_TIMESTAMP, " +
-                    "FOREIGN KEY (user_id) REFERENCES users(id))");
+                    "FOREIGN KEY (user_id) REFERENCES users(id)" +
+                    ");");
 
             plugin.log(msg.getMessage("database.setup.tables.success"));
         } catch (SQLException e) {
@@ -102,4 +117,3 @@ public class DatabaseSetup {
         }
     }
 }
-

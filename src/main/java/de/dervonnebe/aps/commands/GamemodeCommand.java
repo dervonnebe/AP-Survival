@@ -54,7 +54,7 @@ public class GamemodeCommand implements CommandExecutor, TabCompleter {
         Player player = (Player) sender;
 
         if (!player.hasPermission("aps.gamemode")) {
-            player.sendMessage(plugin.getPrefix() + msg.getMessage("no-perm").replace("%perm%", "aps.gamemode"));
+            player.sendMessage(plugin.getPrefix() + msg.getPlayerMessage(player, "no-perm").replace("%perm%", "aps.gamemode"));
             return true;
         }
 
@@ -69,13 +69,13 @@ public class GamemodeCommand implements CommandExecutor, TabCompleter {
         try {
             newGameMode = GameMode.valueOf(args[0].toUpperCase());
         } catch (IllegalArgumentException e) {
-            player.sendMessage(plugin.getPrefix() + msg.getMessage("command.gamemode.invalid-gamemode"));
+            player.sendMessage(plugin.getPrefix() + msg.getPlayerMessage(player, "command.gamemode.invalid-gamemode"));
             return false;
         }
 
         if (args.length == 2) {
             if (!player.hasPermission("aps.gamemode.other")) {
-                player.sendMessage(plugin.getPrefix() + msg.getMessage("no-perm").replace("%perm%", "aps.gamemode.other"));
+                player.sendMessage(plugin.getPrefix() + msg.getPlayerMessage(player, "no-perm").replace("%perm%", "aps.gamemode.other"));
                 return true;
             }
 

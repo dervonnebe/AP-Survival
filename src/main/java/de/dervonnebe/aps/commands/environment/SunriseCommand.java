@@ -23,10 +23,10 @@ public class SunriseCommand implements CommandExecutor {
 
         if (player.hasPermission("aps.command.sunrise")) {
             player.getWorld().setTime(0);
-            player.sendMessage(plugin.getPrefix() + msg.getMessage("command.environment.sunrise"));
+            player.sendMessage(plugin.getPrefix() + msg.getPlayerMessage(player, "command.environment.sunrise"));
             return true;
         } else {
-            player.sendMessage(plugin.getPrefix() + msg.getMessage("command.no-perm").replace("%perm%", "aps.command.sunrise"));
+            player.sendMessage(plugin.getPrefix() + msg.getPlayerMessage(player, "no-perm").replace("%perm%", "aps.command.sunrise"));
         }
 
         return true;
