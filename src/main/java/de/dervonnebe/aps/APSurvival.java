@@ -12,9 +12,16 @@ import lombok.Getter;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.HashMap;
+
 public final class APSurvival extends JavaPlugin {
     @Getter
     private Boolean debug = true; // Diese einstellung sollte auf false gesetzt werden, wenn das Plugin auf einem Produktivsystem läuft
+    @Getter
+    private HashMap<String, URI> serverLinks = new HashMap<>();
+
 
     @Getter
     String prefix;
@@ -37,6 +44,7 @@ public final class APSurvival extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        long now = System.currentTimeMillis();
         instance = this;
         configManager = new ConfigManager(this);
         prefix = configManager.getString("prefix");
@@ -52,14 +60,15 @@ public final class APSurvival extends JavaPlugin {
         registerCommands();
         registerEvents();
         registerBStats();
-        log("APSurvival started!");
+        log("APSurvival started! in §8" + (System.currentTimeMillis() - now) + "ms");
     }
 
     @Override
     public void onDisable() {
+        long now = System.currentTimeMillis();
         log("Stopping APSurvival...");
         databaseManager.closeConnection();
-        log("APSurvival stopped!","BYE");
+        log("APSurvival stopped! in §8" + (System.currentTimeMillis() - now) + "ms","BYE");
     }
 
     private void setupDatabase(Boolean rebuild) {
@@ -163,6 +172,7 @@ public final class APSurvival extends JavaPlugin {
         pm.registerEvents(new JoinQuitEvent(this), this);
         pm.registerEvents(new CommandPreProcessEvent(this), this);
         pm.registerEvents(new CommandTabCompleteEvent(), this);
+        pm.registerEvents(new ServerLinksEvent(this), this);
 
         log("Events registered!");
     }
@@ -179,6 +189,30 @@ public final class APSurvival extends JavaPlugin {
         //metrics.addCustomChart(new Metrics.SimplePie("chart_id", () -> ""));
         log("bStats registered!");
     }
+
+    public void loadServerLinks() {
+        serverLinks.clear();
+
+        var serverLinksSection = getConfig().getConfigurationSection("serverLinks");
+        if (serverLinksSection == null) {
+            log("No server links found in configuration.");
+            return;
+        }
+
+        var keys = serverLinksSection.getKeys(false);
+        for (String key : keys) {
+            String label = serverLinksSection.getString(key + ".label");
+            String value = serverLinksSection.getString(key);
+            try {
+                serverLinks.put(label, new URI(value.replace("&", "§")));
+            } catch (URISyntaxException e) {
+                log("Invalid URI for key " + key + ": " + value, "WARNING");
+            }
+        }
+
+        log("Loaded " + keys.size() + " server links.");
+    }
+
 
     // Console Logger
     public void log(String message, String... type) {
