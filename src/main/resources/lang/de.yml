@@ -132,6 +132,14 @@ command:
       income-alert: "§aAchtung Broadcast"
       sent: "§7Du hast folgende Broadcast nachricht an §f§l%language%§7 gesendet. Nachricht:§8 %message%"
 
+  home:
+    set: "§7Dein Zuhause wurde erfolgreich gesetzt. §8[§7%home%§8]"
+    delete: "§7Dein Zuhause wurde erfolgreich gelöscht. §8[§7%home%§8]"
+    no-home: "§cDu hast kein Zuhause gesetzt."
+    no-exist: "§cDas Zuhause §f§l%home%§c existiert nicht."
+    teleport: "§7Du wurdest zu deinem Zuhause §f§l%home%§7 teleportiert."
+    teleport-timed: "§7Du wirst in §f§l%time%§7 Sekunden zu deinem Zuhause §f§l%home%§7 teleportiert."
+
 database:
   connection:
     success: "§7Die Verbindung zur Datenbank wurde erfolgreich hergestellt. §8[§7%type%§8]"

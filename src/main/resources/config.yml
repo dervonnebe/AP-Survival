@@ -39,6 +39,15 @@ join-leaves:
     no-message: false
     particle: true
 
+teleportation:
+  tpa:
+    cooldown: 5 # Cooldown in seconds
+    request-timeout: 30 # Request timeout in seconds
+    request-sound: ENTITY_EXPERIENCE_ORB_PICKUP
+  home:
+    cooldown: 5
+    max-homes: 3 # Permission: aps.home.max.<number> if you want to set a specific amount of homes for a player
+
 bstats: true # If you want to support the plugin, set this to false
 # Do not change the following settings unless you know what you are doing
 file-version: 1.0-BETA
