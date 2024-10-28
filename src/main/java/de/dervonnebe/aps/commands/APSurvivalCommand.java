@@ -68,6 +68,11 @@ public class APSurvivalCommand implements CommandExecutor, TabCompleter {
             return true;
         }
 
+        if (args.length == 1 && args[0].equalsIgnoreCase("reload")) {
+            plugin.reloadConfig();
+            return true;
+        }
+
         sender.sendMessage(plugin.getPrefix() + "§7Invalid command usage.");
         return false;
     }
@@ -78,6 +83,7 @@ public class APSurvivalCommand implements CommandExecutor, TabCompleter {
 
         if (args.length == 1) {
             completions.add("debug");
+            completions.add("reload");
         } else if (args.length == 2 && args[0].equalsIgnoreCase("debug")) {
             completions.add("data");
         } else if (args.length == 3 && args[0].equalsIgnoreCase("debug") && args[1].equalsIgnoreCase("data")) {
