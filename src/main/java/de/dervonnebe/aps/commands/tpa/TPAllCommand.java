@@ -22,14 +22,14 @@ public class TPAllCommand implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         if (!(sender instanceof Player)) {
-            sender.sendMessage(msg.getMessage("command.only-players"));
+            sender.sendMessage(plugin.getPrefix() + msg.getMessage("command.only-players"));
             return true;
         }
 
         Player player = (Player) sender;
 
         if (!player.hasPermission("aps.command.tpall")) {
-            player.sendMessage(msg.getPlayerMessage(player, "no-perm").replace("%perm%", "aps.command.tpall"));
+            player.sendMessage(plugin.getPrefix() + msg.getPlayerMessage(player, "no-perm").replace("%perm%", "aps.command.tpall"));
             return true;
         }
 
@@ -37,7 +37,7 @@ public class TPAllCommand implements CommandExecutor {
             target.teleport(player.getLocation());
         }
 
-        player.sendMessage(msg.getPlayerMessage(player, "command.tpall.success"));
+        player.sendMessage(plugin.getPrefix() + msg.getPlayerMessage(player, "command.tpall.success"));
         return true;
     }
 }

@@ -21,25 +21,25 @@ public class TPAAutoCommand implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         if (!(sender instanceof Player)) {
-            sender.sendMessage(msg.getMessage("command.only-players"));
+            sender.sendMessage(plugin.getPrefix() + msg.getMessage("command.only-players"));
             return true;
         }
 
         Player player = (Player) sender;
 
         if (!player.hasPermission("aps.command.tpauto")) {
-            player.sendMessage(msg.getPlayerMessage(player, "no-perm").replace("%perm%", "aps.command.tpauto"));
+            player.sendMessage(plugin.getPrefix() + msg.getPlayerMessage(player, "no-perm").replace("%perm%", "aps.command.tpauto"));
             return true;
         }
 
         if (plugin.getDataManager().getBooleanData(player, "tpauto")) {
             plugin.getDataManager().setBooleanData(player, "tpauto", false);
-            player.sendMessage(msg.getPlayerMessage(player, "command.tpauto.disabled"));
+            player.sendMessage(plugin.getPrefix() + msg.getPlayerMessage(player, "command.tpauto.disabled"));
             return true;
         }
 
         plugin.getDataManager().setBooleanData(player, "tpauto", true);
-        player.sendMessage(msg.getPlayerMessage(player, "command.tpauto.enabled"));
+        player.sendMessage(plugin.getPrefix() + msg.getPlayerMessage(player, "command.tpauto.enabled"));
         return true;
     }
 }

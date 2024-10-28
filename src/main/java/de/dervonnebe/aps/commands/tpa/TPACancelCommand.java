@@ -27,31 +27,31 @@ public class TPACancelCommand implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         if (!(sender instanceof Player)) {
-            sender.sendMessage(msg.getMessage("command.only-players"));
+            sender.sendMessage(plugin.getPrefix() + msg.getMessage("command.only-players"));
             return true;
         }
 
         Player player = (Player) sender;
 
         if (!player.hasPermission("aps.command.tpacancel")) {
-            player.sendMessage(msg.getPlayerMessage(player, "no-perm").replace("%perm%", "aps.command.tpacancel"));
+            player.sendMessage(plugin.getPrefix() + msg.getPlayerMessage(player, "no-perm").replace("%perm%", "aps.command.tpacancel"));
             return true;
         }
 
         if (args.length == 1) {
             Player target = Bukkit.getPlayer(args[0]);
             if (target == null || !plugin.getTpa().getTeleportRequests().containsKey(target)) {
-                player.sendMessage(msg.getPlayerMessage(player, "command.tpacancel.no-request"));
+                player.sendMessage(plugin.getPrefix() + msg.getPlayerMessage(player, "command.tpacancel.no-request"));
                 return true;
             }
 
             tpa.removeRequest(target);
-            player.sendMessage(msg.getPlayerMessage(player, "command.tpacancel.success").replace("%target%", target.getName()));
+            player.sendMessage(plugin.getPrefix() + msg.getPlayerMessage(player, "command.tpacancel.success").replace("%target%", target.getName()));
             return true;
         }
 
         tpa.getTeleportRequests().clear();
-        player.sendMessage(msg.getPlayerMessage(player, "command.tpacancel.all-cancelled"));
+        player.sendMessage(plugin.getPrefix() + msg.getPlayerMessage(player, "command.tpacancel.all-cancelled"));
         return true;
     }
 }

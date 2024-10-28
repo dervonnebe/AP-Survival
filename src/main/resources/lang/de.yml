@@ -6,7 +6,9 @@ no-perm: "&cDu hast keine Berechtigung, das zu tun. §8(§7%perm%§8)"
 
 button:
   accept: "§8[§aAkzeptieren§8]"
+  accept-hover: "§7Klicke, um zu akzeptieren"
   decline: "§8[§cAblehnen§8]"
+  decline-hover: "§7Klicke, um abzulehnen"
 
 join-leaves:
   join: "§a%player% §7hat den Server betreten."

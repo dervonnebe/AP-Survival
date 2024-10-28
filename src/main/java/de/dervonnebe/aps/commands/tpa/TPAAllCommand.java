@@ -24,21 +24,21 @@ public class TPAAllCommand implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         if (!(sender instanceof Player)) {
-            sender.sendMessage(msg.getMessage("command.only-players"));
+            sender.sendMessage(plugin.getPrefix() + msg.getMessage("command.only-players"));
             return true;
         }
 
         Player player = (Player) sender;
 
         if (!player.hasPermission("aps.command.tpaall")) {
-            player.sendMessage(msg.getPlayerMessage(player, "no-perm").replace("%perm%", "aps.command.tpaall"));
+            player.sendMessage(plugin.getPrefix() + msg.getPlayerMessage(player, "no-perm").replace("%perm%", "aps.command.tpaall"));
             return true;
         }
 
         for (Player target : Bukkit.getOnlinePlayers()) {
             if (target.hasPermission("aps.command.tpaccept")) {
-                target.sendMessage(msg.getPlayerMessage(target, "command.tpa.request").replace("%player%", player.getName()));
-                player.sendMessage(msg.getPlayerMessage(player, "command.tpaall.sent").replace("%target%", target.getName()));
+                target.sendMessage(plugin.getPrefix() + msg.getPlayerMessage(target, "command.tpa.request").replace("%player%", player.getName()));
+                player.sendMessage(plugin.getPrefix() + msg.getPlayerMessage(player, "command.tpaall.sent").replace("%target%", target.getName()));
                 tpa.addTeleportRequest(player, target);
             }
         }

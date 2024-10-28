@@ -29,14 +29,14 @@ public class TPACommand implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         if (!(sender instanceof Player)) {
-            sender.sendMessage(msg.getMessage("command.only-players"));
+            sender.sendMessage(plugin.getPrefix() + msg.getMessage("command.only-players"));
             return true;
         }
 
         Player player = (Player) sender;
 
         if (!player.hasPermission("aps.command.tpa")) {
-            player.sendMessage(msg.getPlayerMessage(player, "no-perm").replace("%perm%", "aps.command.tpa"));
+            player.sendMessage(plugin.getPrefix() + msg.getPlayerMessage(player, "no-perm").replace("%perm%", "aps.command.tpa"));
             return true;
         }
 
@@ -44,17 +44,17 @@ public class TPACommand implements CommandExecutor {
             Player target = Bukkit.getPlayer(args[0]);
 
             if (target == null) {
-                player.sendMessage(msg.getPlayerMessage(player, "command.player-not-found").replace("%player%", args[0]));
+                player.sendMessage(plugin.getPrefix() + msg.getPlayerMessage(player, "command.player-not-found").replace("%player%", args[0]));
                 return true;
             }
 
             if (!target.hasPermission("aps.command.tpa.receive")) {
-                player.sendMessage(msg.getPlayerMessage(player, "command.tpa.cannot-receive"));
+                player.sendMessage(plugin.getPrefix() + msg.getPlayerMessage(player, "command.tpa.cannot-receive"));
                 return true;
             }
 
             if (plugin.getDataManager().getBooleanData(target, "tpauto")) {
-                player.sendMessage(msg.getPlayerMessage(player, "command.tpauto.sucsess"));
+                player.sendMessage(plugin.getPrefix() + msg.getPlayerMessage(player, "command.tpauto.sucsess"));
                 player.teleport(target);
                 return true;
             }
@@ -64,12 +64,12 @@ public class TPACommand implements CommandExecutor {
             Component acceptButton = Component.text(msg.getPlayerMessage(target, "button.accept"))
                     .color(net.kyori.adventure.text.format.NamedTextColor.GREEN)
                     .clickEvent(ClickEvent.runCommand("/tpaccept " + player.getName()))
-                    .hoverEvent(HoverEvent.showText(Component.text("Klicke, um zu akzeptieren")));
+                    .hoverEvent(HoverEvent.showText(Component.text(msg.getPlayerMessage(target, "button.accept-hover"))));
 
             Component declineButton = Component.text(msg.getPlayerMessage(target, "button.decline"))
                     .color(net.kyori.adventure.text.format.NamedTextColor.RED)
                     .clickEvent(ClickEvent.runCommand("/tpacancel " + player.getName()))
-                    .hoverEvent(HoverEvent.showText(Component.text("Klicke, um abzulehnen")));
+                    .hoverEvent(HoverEvent.showText(Component.text(msg.getPlayerMessage(target, "button.decline-hover"))));
 
             requestMessage = requestMessage
                     .replaceText(Pattern.compile("%btn-accept%"), builder -> acceptButton)

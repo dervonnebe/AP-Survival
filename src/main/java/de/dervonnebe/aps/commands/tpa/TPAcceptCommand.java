@@ -27,24 +27,24 @@ public class TPAcceptCommand implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         if (!(sender instanceof Player)) {
-            sender.sendMessage(msg.getMessage("command.only-players"));
+            sender.sendMessage(plugin.getPrefix() + msg.getMessage("command.only-players"));
             return true;
         }
 
         Player player = (Player) sender;
 
         if (!player.hasPermission("aps.command.tpaccept")) {
-            player.sendMessage(msg.getPlayerMessage(player, "no-perm").replace("%perm%", "aps.command.tpaccept"));
+            player.sendMessage(plugin.getPrefix() + msg.getPlayerMessage(player, "no-perm").replace("%perm%", "aps.command.tpaccept"));
             return true;
         }
 
         if (plugin.getTpa().getTeleportRequests().containsKey(player)) {
             Player requester = tpa.getRequest(player).getRequester();
             player.teleport(requester.getLocation());
-            requester.sendMessage(msg.getPlayerMessage(requester, "command.tpaccept.success").replace("%player%", player.getName()));
+            requester.sendMessage(plugin.getPrefix() + msg.getPlayerMessage(requester, "command.tpaccept.success").replace("%player%", player.getName()));
             tpa.removeRequest(player);
         } else {
-            player.sendMessage(msg.getPlayerMessage(player, "command.tpaccept.no-request"));
+            player.sendMessage(plugin.getPrefix() + msg.getPlayerMessage(player, "command.tpaccept.no-request"));
         }
         return true;
     }

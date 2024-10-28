@@ -24,30 +24,30 @@ public class TPAHereCommand implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         if (!(sender instanceof Player)) {
-            sender.sendMessage(msg.getMessage("command.only-players"));
+            sender.sendMessage(plugin.getPrefix() + msg.getMessage("command.only-players"));
             return true;
         }
 
         Player player = (Player) sender;
 
         if (!player.hasPermission("aps.command.tpahere")) {
-            player.sendMessage(msg.getPlayerMessage(player, "no-perm").replace("%perm%", "aps.command.tpahere"));
+            player.sendMessage(plugin.getPrefix() + msg.getPlayerMessage(player, "no-perm").replace("%perm%", "aps.command.tpahere"));
             return true;
         }
 
         if (args.length != 1) {
-            player.sendMessage(msg.getPlayerMessage(player, "command.invalid").replace("%command%", "/tpahere <player>"));
+            player.sendMessage(plugin.getPrefix() + msg.getPlayerMessage(player, "command.invalid").replace("%command%", "/tpahere <player>"));
             return true;
         }
 
         Player target = Bukkit.getPlayer(args[0]);
         if (target == null) {
-            player.sendMessage(msg.getPlayerMessage(player, "command.player-not-found").replace("%player%", args[0]));
+            player.sendMessage(plugin.getPrefix() + msg.getPlayerMessage(player, "command.player-not-found").replace("%player%", args[0]));
             return true;
         }
 
-        target.sendMessage(msg.getPlayerMessage(target, "command.tpahere.request").replace("%player%", player.getName()));
-        player.sendMessage(msg.getPlayerMessage(player, "command.tpahere.sent").replace("%target%", target.getName()));
+        target.sendMessage(plugin.getPrefix() + msg.getPlayerMessage(target, "command.tpahere.request").replace("%player%", player.getName()));
+        player.sendMessage(plugin.getPrefix() + msg.getPlayerMessage(player, "command.tpahere.sent").replace("%target%", target.getName()));
 
         tpa.addTeleportRequest(player, target);
         return true;
