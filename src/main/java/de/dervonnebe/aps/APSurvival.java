@@ -202,9 +202,9 @@ public final class APSurvival extends JavaPlugin {
         var keys = serverLinksSection.getKeys(false);
         for (String key : keys) {
             String label = serverLinksSection.getString(key + ".label");
-            String value = serverLinksSection.getString(key);
+            String url = serverLinksSection.getString(key + ".url");
             try {
-                serverLinks.put(label, new URI(value.replace("&", "§")));
+                serverLinks.put(label, new URI(url.replace("&", "§")));
             } catch (URISyntaxException e) {
                 log("Invalid URI for key " + key + ": " + value, "WARNING");
             }
