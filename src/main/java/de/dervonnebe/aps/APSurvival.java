@@ -206,7 +206,7 @@ public final class APSurvival extends JavaPlugin {
             try {
                 serverLinks.put(label, new URI(url.replace("&", "§")));
             } catch (URISyntaxException e) {
-                log("Invalid URI for key " + key + ": " + value, "WARNING");
+                log("Invalid URI for key " + key + ": " + url, "WARNING");
             }
         }
 
