@@ -2,10 +2,13 @@ package de.dervonnebe.aps.utils;
 
 import de.dervonnebe.aps.APSurvival;
 import org.bukkit.Bukkit;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandMap;
 import org.bukkit.command.CommandSender;
-import org.bukkit.command.PluginCommand;
+import org.bukkit.command.defaults.BukkitCommand;
 import org.bukkit.entity.Player;
 
+import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,14 +17,24 @@ public class CustomCommandManager {
     private final APSurvival plugin;
     private final Messages msg;
     private final Map<String, CustomCommand> commands = new HashMap<>();
+    private CommandMap commandMap;
 
     public CustomCommandManager(APSurvival plugin) {
         this.plugin = plugin;
         this.msg = plugin.getMessages();
-        plugin.log("Loading custom commands...");
+        loadCommandMap(); // CommandMap initialisieren
         loadCommandsFromConfig();
-        int commandCount = plugin.getConfig().getConfigurationSection("custom-commands.commands").getKeys(false).size();
-        plugin.log("§l" + commandCount + "§7Custom commands loaded!");
+        plugin.log("§l" + commands.size() + "§7 Custom commands loaded!");
+    }
+
+    private void loadCommandMap() {
+        try {
+            Field commandMapField = Bukkit.getServer().getClass().getDeclaredField("commandMap");
+            commandMapField.setAccessible(true);
+            this.commandMap = (CommandMap) commandMapField.get(Bukkit.getServer());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void loadCommandsFromConfig() {
@@ -33,24 +46,30 @@ public class CustomCommandManager {
             CustomCommand customCommand = new CustomCommand(commandName, actionType, action, message);
             commands.put(commandName, customCommand);
 
-            PluginCommand pluginCommand = plugin.getCommand(commandName);
-            if (pluginCommand == null) {
-                pluginCommand = plugin.getServer().getPluginCommand(commandName);
-                pluginCommand.setExecutor((sender, command, label, args) -> {
+            // Command dynamisch registrieren
+            registerCommand(commandName, customCommand);
+        });
+    }
+
+    private void registerCommand(String commandName, CustomCommand customCommand) {
+        if (commandMap != null) {
+            Command dynamicCommand = new BukkitCommand(commandName) {
+                @Override
+                public boolean execute(CommandSender sender, String label, String[] args) {
                     handleCustomCommand(sender, customCommand, args);
                     return true;
-                });
-            }
-        });
+                }
+            };
+            commandMap.register(plugin.getName(), dynamicCommand);
+        }
     }
 
     private void handleCustomCommand(CommandSender sender, CustomCommand command, String[] args) {
         String action = command.getAction().replace("%args%", String.join(" ", args));
-        String message = command.getMessage();
-        message.replace("%prefix%", plugin.getConfig().getString("prefix"));
-        message.replace("%player%", sender.getName());
-        message.replace("%action%", action);
-        message.replace("%args%", String.join(" ", args));
+        String message = command.getMessage().replace("%prefix%", plugin.getConfig().getString("prefix"))
+                .replace("%player%", sender.getName())
+                .replace("%action%", action)
+                .replace("%args%", String.join(" ", args));
 
         switch (command.getActionType()) {
             case "OPEN-URL":
@@ -65,7 +84,7 @@ public class CustomCommandManager {
                     if (command.getMessage() != null) {
                         sender.sendMessage(message);
                     }
-                }
+                } else sender.sendMessage(plugin.getPrefix() + msg.getMessage("custom-command.no-player"));
                 break;
             case "RUNCOMMAND[SERVER]":
                 Bukkit.dispatchCommand(Bukkit.getConsoleSender(), action);
@@ -77,9 +96,7 @@ public class CustomCommandManager {
                 sender.sendMessage(message);
                 break;
             default:
-                if (sender instanceof Player) {
-                    sender.sendMessage(plugin.getPrefix() + msg.getPlayerMessage(((Player) sender).getPlayer(), "custom-command.invalid-actiontype"));
-                } else sender.sendMessage(plugin.getPrefix() + msg.getMessage("custom-command.invalid-actiontype"));
+                sender.sendMessage(plugin.getPrefix() + msg.getMessage("custom-command.invalid-actiontype"));
         }
     }
 }
