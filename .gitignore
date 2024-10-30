@@ -3,6 +3,9 @@
 .gradle/8.8/*
 build/
 
+=======
+.idea
+server
 
 *.iml
 *.ipr
@@ -10,6 +13,28 @@ build/
 
 # IntelliJ
 out/
+
+=======
+# Maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+
+# Eclipse
+.classpath
+.project
+.settings/
+
+# NetBeans
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+
+# Gradle
+.gradle
+build
 
 # Compiled class file
 *.class
@@ -117,3 +142,5 @@ run/
 .gradle/8.8/executionHistory/executionHistory.bin
 *.lock
 *.bin
+=======
+run/

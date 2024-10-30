@@ -6,6 +6,8 @@ author: dervonnebe
 description: Watch our Website
 website: https://dervonnebe.de/ap/survival
 commands:
+    addCommand:
+
     apsurvival:
         description: "Main command for AP-Survival"
         usage: "/<command>"
