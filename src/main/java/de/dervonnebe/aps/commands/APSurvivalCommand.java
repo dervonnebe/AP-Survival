@@ -68,15 +68,12 @@ public class APSurvivalCommand implements CommandExecutor, TabCompleter {
             return true;
         }
 
-<<<<<<< Updated upstream
-=======
         if (args.length == 1 && args[0].equalsIgnoreCase("reload")) {
             plugin.reloadConfig();
             plugin.loadServerLinks();
             return true;
         }
 
->>>>>>> Stashed changes
         sender.sendMessage(plugin.getPrefix() + "§7Invalid command usage.");
         return false;
     }
