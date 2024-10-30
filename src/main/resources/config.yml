@@ -47,6 +47,26 @@ join-leaves:
     no-message: false
     particle: true
 
+custom-commands:
+  enabled: true
+  commands:
+    discord:
+      action-type: OPEN-URL
+      action: "https://dervonnebe.de/discord"
+      message: "%prefix% §4Discord: §7dervonnebe.de/discord"
+    serversay:
+      action-type: RUNCOMMAND[SERVER]
+      action: "say %args%"
+      message: "Du hast folgenden Command ausführen lassen: %action%"
+    playersay:
+      action-type: RUNCOMMAND[PLAYER]
+      action: "say %args%"
+      message: "Du hast folgenden Command ausführen lassen: %action%"
+    plaintext:
+      action-type: PLAIN-MESSAGE
+      message: "§7%args%"
+
+
 bstats: true # If you want to support the plugin, set this to false
 # Do not change the following settings unless you know what you are doing
 file-version: 1.0-BETA

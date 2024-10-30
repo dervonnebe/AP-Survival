@@ -19,6 +19,10 @@ join-leaves:
     actionbar: "§7Willkommen auf dem Server, §a%player%§7!"
     chat: "§7Willkommen auf dem Server, §a%player%§7!"
 
+custom-commands:
+  invalid-actiontype: "§cUngültiger Aktionstype! Bitte benutze einen gültigen Aktionstyp."
+  no-player: "§cDu musst ein Spieler sein, um diesen Befehl auszuführen."
+
 command:
   # Command Fehlermeldungen
   player-not-found: "§cSpieler nicht gefunden! §8(§7%player%§8)"

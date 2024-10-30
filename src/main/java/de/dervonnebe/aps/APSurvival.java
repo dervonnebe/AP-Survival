@@ -57,6 +57,10 @@ public final class APSurvival extends JavaPlugin {
         tpa = new TPA(this);
         databaseManager = new DatabaseManager(this);
 
+        if (configManager.getBoolean("custom-commands.enabled")) {
+            new CustomCommandManager(this);
+        }
+
         loadServerLinks();
         setupDatabase(debug);
         registerCommands();
