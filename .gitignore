@@ -33,7 +33,7 @@ pom.xml.versionsBackup
 /nbdist/
 
 # Gradle
-.gradle
+#.gradle
 build
 
 # Compiled class file
