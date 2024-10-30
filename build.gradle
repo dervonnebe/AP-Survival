@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'com.github.johnrengelman.shadow' version '8.1.1'
 }
 
 group = 'de.dervonnebe'
@@ -48,4 +49,21 @@ processResources {
     filesMatching('plugin.yml') {
         expand props
     }
+}
+
+shadowJar {
+    shadowJar {
+        archiveBaseName.set("AP-Survival")       // Basisname des Shadow Jars
+        archiveVersion.set(version)                 // Versionsnummer
+        archiveClassifier.set("")                   // Leerer Classifier
+        manifest {
+            attributes(
+                    'Main-Class': 'de.dervonnebe.aps' // Pfad zur Hauptklasse
+            )
+        }
+    }
+}
+
+build {
+    dependsOn(shadowJar)
 }
