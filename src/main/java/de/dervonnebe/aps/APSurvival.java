@@ -43,6 +43,7 @@ public final class APSurvival extends JavaPlugin {
         languageManager = new LanguageManager(this, debug, new String[]{"de.yml", "en.yml"});
         messages = new Messages(this);
         log("Starting APSurvival...");
+        checkDependencies();
         if (debug) log("Debug mode is enabled!", "WARNING");
         dataManager = new PersistentDataManager(this);
         tpa = new TPA(this);
@@ -60,6 +61,12 @@ public final class APSurvival extends JavaPlugin {
         log("Stopping APSurvival...");
         databaseManager.closeConnection();
         log("APSurvival stopped!","BYE");
+    }
+
+    private void checkDependencies() {
+        log("Checking dependencies...");
+        log("No dependencies to check.");
+        //log("Dependencies checked!");
     }
 
     private void setupDatabase(Boolean rebuild) {
@@ -179,6 +186,47 @@ public final class APSurvival extends JavaPlugin {
         //metrics.addCustomChart(new Metrics.SimplePie("chart_id", () -> ""));
         log("bStats registered!");
     }
+
+    public boolean isVersionGreaterOrEqual(String server, String required) {
+        String[] serverParts = server.split("\\.");
+        String[] requiredParts = required.split("\\.");
+
+        for (int i = 0; i < Math.max(serverParts.length, requiredParts.length); i++) {
+            int serverPart = (i < serverParts.length) ? Integer.parseInt(serverParts[i]) : 0;
+            int requiredPart = (i < requiredParts.length) ? Integer.parseInt(requiredParts[i]) : 0;
+
+            if (serverPart > requiredPart) {
+                return true;
+            } else if (serverPart < requiredPart) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public void loadServerLinks() {
+        serverLinks.clear();
+
+        var serverLinksSection = getConfig().getConfigurationSection("serverLinks");
+        if (serverLinksSection == null) {
+            log("No server links found in configuration.");
+            return;
+        }
+
+        var keys = serverLinksSection.getKeys(false);
+        for (String key : keys) {
+            String label = serverLinksSection.getString(key + ".label");
+            String url = serverLinksSection.getString(key + ".url");
+            try {
+                serverLinks.put(label, new URI(url.replace("&", "§")));
+            } catch (URISyntaxException e) {
+                log("Invalid URI for key " + key + ": " + url, "WARNING");
+            }
+        }
+
+        log("Loaded " + keys.size() + " server links.");
+    }
+
 
     // Console Logger
     public void log(String message, String... type) {
