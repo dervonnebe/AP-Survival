@@ -1,6 +1,7 @@
 package de.dervonnebe.aps.utils;
 
 import de.dervonnebe.aps.APSurvival;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandMap;
@@ -22,7 +23,7 @@ public class CustomCommandManager {
     public CustomCommandManager(APSurvival plugin) {
         this.plugin = plugin;
         this.msg = plugin.getMessages();
-        loadCommandMap(); // CommandMap initialisieren
+        loadCommandMap();
         loadCommandsFromConfig();
         plugin.log("§l" + commands.size() + "§7 Custom commands loaded!");
     }
@@ -75,7 +76,7 @@ public class CustomCommandManager {
             case "OPEN-URL":
                 if (sender instanceof Player) {
                     ((Player) sender).sendMessage(message);
-                    ((Player) sender).spigot().sendMessage(new net.md_5.bungee.api.chat.TextComponent(action));
+                    ((Player) sender).spigot().sendMessage(new TextComponent(action));
                 } else sender.sendMessage(message);
                 break;
             case "RUNCOMMAND[PLAYER]":
