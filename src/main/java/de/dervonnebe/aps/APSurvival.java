@@ -12,9 +12,16 @@ import lombok.Getter;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.HashMap;
+
 public final class APSurvival extends JavaPlugin {
     @Getter
     private Boolean debug = true; // Diese einstellung sollte auf false gesetzt werden, wenn das Plugin auf einem Produktivsystem läuft
+    @Getter
+    private HashMap<String, URI> serverLinks = new HashMap<>();
+
 
     @Getter
     String prefix;
@@ -34,9 +41,11 @@ public final class APSurvival extends JavaPlugin {
     DatabaseSetup databaseSetup;
 
     LanguageManager languageManager;
+    private DynamicCommandManager dynamicCommandManager;
 
     @Override
     public void onEnable() {
+        long now = System.currentTimeMillis();
         instance = this;
         configManager = new ConfigManager(this);
         prefix = configManager.getString("prefix");
@@ -49,18 +58,27 @@ public final class APSurvival extends JavaPlugin {
         tpa = new TPA(this);
         databaseManager = new DatabaseManager(this);
 
+
+        dynamicCommandManager = new DynamicCommandManager(this);
+
+        getCommand("addCommand").setExecutor(new AddCommandExecutor(dynamicCommandManager));
+        getCommand("addCommand").setTabCompleter(new AddCommandTabCompleter());
+
+
+        loadServerLinks();
         setupDatabase(debug);
         registerCommands();
         registerEvents();
         registerBStats();
-        log("APSurvival started!");
+        log("APSurvival started! in §8" + (System.currentTimeMillis() - now) + "ms");
     }
 
     @Override
     public void onDisable() {
+        long now = System.currentTimeMillis();
         log("Stopping APSurvival...");
         databaseManager.closeConnection();
-        log("APSurvival stopped!","BYE");
+        log("APSurvival stopped! in §8" + (System.currentTimeMillis() - now) + "ms","BYE");
     }
 
     private void checkDependencies() {
@@ -170,6 +188,7 @@ public final class APSurvival extends JavaPlugin {
         pm.registerEvents(new JoinQuitEvent(this), this);
         pm.registerEvents(new CommandPreProcessEvent(this), this);
         pm.registerEvents(new CommandTabCompleteEvent(), this);
+        pm.registerEvents(new ServerLinksEvent(this), this);
 
         log("Events registered!");
     }
