@@ -47,6 +47,13 @@ join-leaves:
     no-message: false
     particle: true
 
+spawn-fly:
+  enabled: true
+  boost: 5
+  spawnRadius: 20
+  boostEnabled: true
+  world: "world"
+
 custom-commands:
   enabled: true
   commands:

@@ -136,6 +136,9 @@ command:
       income-alert: "§aAchtung Broadcast"
       sent: "§7Du hast folgende Broadcast nachricht an §f§l%language%§7 gesendet. Nachricht:§8 %message%"
 
+spawn-fly:
+  boost-info: "§7Drücke §f§l%key%§7 um dich zu Boosten."
+
 database:
   connection:
     success: "§7Die Verbindung zur Datenbank wurde erfolgreich hergestellt. §8[§7%type%§8]"

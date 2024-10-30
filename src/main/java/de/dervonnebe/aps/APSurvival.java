@@ -188,6 +188,10 @@ public final class APSurvival extends JavaPlugin {
         pm.registerEvents(new CommandTabCompleteEvent(), this);
         pm.registerEvents(new ServerLinksEvent(this), this);
 
+        if (configManager.getBoolean("spawn-fly.enabled")) {
+            pm.registerEvents(SpawnFlyEvents.create(this), this);
+        }
+
         log("Events registered!");
     }
 
