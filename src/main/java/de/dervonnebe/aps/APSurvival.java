@@ -52,6 +52,7 @@ public final class APSurvival extends JavaPlugin {
         languageManager = new LanguageManager(this, debug, new String[]{"de.yml", "en.yml"});
         messages = new Messages(this);
         log("Starting APSurvival...");
+        checkDependencies();
         if (debug) log("Debug mode is enabled!", "WARNING");
         dataManager = new PersistentDataManager(this);
         tpa = new TPA(this);
@@ -78,6 +79,12 @@ public final class APSurvival extends JavaPlugin {
         log("Stopping APSurvival...");
         databaseManager.closeConnection();
         log("APSurvival stopped! in §8" + (System.currentTimeMillis() - now) + "ms","BYE");
+    }
+
+    private void checkDependencies() {
+        log("Checking dependencies...");
+        log("No dependencies to check.");
+        //log("Dependencies checked!");
     }
 
     private void setupDatabase(Boolean rebuild) {

@@ -1,2 +1,3 @@
-# MSG Toggle korrigieren (Database)
-# Database Table neu Planen
+- MSG Toggle korrigieren (Database)
+- Database Table neu Planen
+- Server Version Chcker with ServerLinks
