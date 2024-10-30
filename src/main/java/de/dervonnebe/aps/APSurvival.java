@@ -41,6 +41,7 @@ public final class APSurvival extends JavaPlugin {
     DatabaseSetup databaseSetup;
 
     LanguageManager languageManager;
+    private DynamicCommandManager dynamicCommandManager;
 
     @Override
     public void onEnable() {
@@ -56,6 +57,14 @@ public final class APSurvival extends JavaPlugin {
         tpa = new TPA(this);
         databaseManager = new DatabaseManager(this);
 
+
+        dynamicCommandManager = new DynamicCommandManager(this);
+
+        getCommand("addCommand").setExecutor(new AddCommandExecutor(dynamicCommandManager));
+        getCommand("addCommand").setTabCompleter(new AddCommandTabCompleter());
+
+
+        loadServerLinks();
         setupDatabase(debug);
         registerCommands();
         registerEvents();
@@ -188,6 +197,23 @@ public final class APSurvival extends JavaPlugin {
         // Optional: Add custom charts
         //metrics.addCustomChart(new Metrics.SimplePie("chart_id", () -> ""));
         log("bStats registered!");
+    }
+
+    public boolean isVersionGreaterOrEqual(String server, String required) {
+        String[] serverParts = server.split("\\.");
+        String[] requiredParts = required.split("\\.");
+
+        for (int i = 0; i < Math.max(serverParts.length, requiredParts.length); i++) {
+            int serverPart = (i < serverParts.length) ? Integer.parseInt(serverParts[i]) : 0;
+            int requiredPart = (i < requiredParts.length) ? Integer.parseInt(requiredParts[i]) : 0;
+
+            if (serverPart > requiredPart) {
+                return true;
+            } else if (serverPart < requiredPart) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public void loadServerLinks() {
