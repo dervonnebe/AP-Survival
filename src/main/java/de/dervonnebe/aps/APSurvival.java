@@ -39,8 +39,10 @@ public final class APSurvival extends JavaPlugin {
     DatabaseManager databaseManager;
     @Getter
     DatabaseSetup databaseSetup;
-
+    @Getter
     LanguageManager languageManager;
+    @Getter
+    PluginManager pm;
 
     @Override
     public void onEnable() {
@@ -56,6 +58,7 @@ public final class APSurvival extends JavaPlugin {
         dataManager = new PersistentDataManager(this);
         tpa = new TPA(this);
         databaseManager = new DatabaseManager(this);
+        pm = getServer().getPluginManager();
 
         if (configManager.getBoolean("custom-commands.enabled")) {
             new CustomCommandManager(this);
@@ -180,7 +183,6 @@ public final class APSurvival extends JavaPlugin {
 
     private void registerEvents() {
         log("Registering events...");
-        PluginManager pm = getServer().getPluginManager();
         pm.registerEvents(new JoinQuitEvent(this), this);
         pm.registerEvents(new CommandPreProcessEvent(this), this);
         pm.registerEvents(new CommandTabCompleteEvent(), this);

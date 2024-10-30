@@ -54,17 +54,21 @@ custom-commands:
       action-type: OPEN-URL
       action: "https://dervonnebe.de/discord"
       message: "%prefix% §4Discord: §7dervonnebe.de/discord"
+      permission: none
     serversay:
       action-type: RUNCOMMAND[SERVER]
       action: "say %args%"
       message: "Du hast folgenden Command ausführen lassen: %action%"
+      permission: "aps.command.serversay"
     playersay:
       action-type: RUNCOMMAND[PLAYER]
       action: "say %args%"
       message: "Du hast folgenden Command ausführen lassen: %action%"
+      permission: "aps.command.playersay"
     plaintext:
       action-type: PLAIN-MESSAGE
       message: "§7%args%"
+      permission: none
 
 
 bstats: true # If you want to support the plugin, set this to false

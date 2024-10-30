@@ -12,6 +12,7 @@ import org.bukkit.entity.Player;
 import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class CustomCommandManager {
 
@@ -43,11 +44,12 @@ public class CustomCommandManager {
             String actionType = plugin.getConfig().getString("custom-commands.commands." + commandName + ".action-type");
             String action = plugin.getConfig().getString("custom-commands.commands." + commandName + ".action");
             String message = plugin.getConfig().getString("custom-commands.commands." + commandName + ".message");
+            String permission = plugin.getConfig().getString("custom-commands.commands." + commandName + ".permission");
 
-            CustomCommand customCommand = new CustomCommand(commandName, actionType, action, message);
+            CustomCommand customCommand = new CustomCommand(commandName, actionType, action, message, permission);
             commands.put(commandName, customCommand);
 
-            // Command dynamisch registrieren
+            // Register command dynamically
             registerCommand(commandName, customCommand);
         });
     }
@@ -66,18 +68,31 @@ public class CustomCommandManager {
     }
 
     private void handleCustomCommand(CommandSender sender, CustomCommand command, String[] args) {
-        String action = command.getAction().replace("%args%", String.join(" ", args));
-        String message = command.getMessage().replace("%prefix%", plugin.getConfig().getString("prefix"))
-                .replace("%player%", sender.getName())
-                .replace("%action%", action)
-                .replace("%args%", String.join(" ", args));
+        if (command.getPermission() != null && !command.getPermission().isEmpty() && !command.getPermission().equalsIgnoreCase("none") && !sender.hasPermission(command.getPermission())) {
+            if (sender instanceof Player) {
+                sender.sendMessage(plugin.getPrefix() + msg.getPlayerMessage((Player) sender, "no-perm").replace("%perm%", command.getPermission()));
+            } else {
+                sender.sendMessage(plugin.getPrefix() + msg.getMessage("no-perm").replace("%perm%", command.getPermission()));
+            }
+            return;
+        }
+
+
+        String action = (command.getAction() != null) ? command.getAction().replace("%args%", String.join(" ", args)) : "";
+        String message = (command.getMessage() != null) ?
+                command.getMessage().replace("%prefix%", plugin.getConfig().getString("prefix", ""))
+                        .replace("%player%", sender.getName())
+                        .replace("%action%", action)
+                        .replace("%args%", String.join(" ", args))
+                : plugin.getPrefix() + "Invalid command message";
 
         switch (command.getActionType()) {
             case "OPEN-URL":
                 if (sender instanceof Player) {
-                    ((Player) sender).sendMessage(message);
                     ((Player) sender).spigot().sendMessage(new TextComponent(action));
-                } else sender.sendMessage(message);
+                } else {
+                    sender.sendMessage(message);
+                }
                 break;
             case "RUNCOMMAND[PLAYER]":
                 if (sender instanceof Player) {
@@ -85,7 +100,9 @@ public class CustomCommandManager {
                     if (command.getMessage() != null) {
                         sender.sendMessage(message);
                     }
-                } else sender.sendMessage(plugin.getPrefix() + msg.getMessage("custom-command.no-player"));
+                } else {
+                    sender.sendMessage(plugin.getPrefix() + msg.getMessage("custom-command.no-player"));
+                }
                 break;
             case "RUNCOMMAND[SERVER]":
                 Bukkit.dispatchCommand(Bukkit.getConsoleSender(), action);
