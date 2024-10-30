@@ -42,7 +42,7 @@ public class MSGCommand implements CommandExecutor, TabCompleter {
         }
 
         if (label.equalsIgnoreCase("reply") || label.equalsIgnoreCase("r")) {
-            if (player.hasPermission("aps.command.reply")) {
+            if (!player.hasPermission("aps.command.reply")) {
                 player.sendMessage(msg.getPlayerMessage(player, "no-perm").replace("%perm%", "aps.command.reply"));
                 return true;
             }

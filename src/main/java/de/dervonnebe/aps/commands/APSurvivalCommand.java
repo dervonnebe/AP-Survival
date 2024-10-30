@@ -68,6 +68,13 @@ public class APSurvivalCommand implements CommandExecutor, TabCompleter {
             return true;
         }
 
+
+        if (args.length == 1 && args[0].equalsIgnoreCase("reload")) {
+            plugin.reloadConfig();
+            plugin.loadServerLinks();
+            return true;
+        }
+
         if (args.length == 1 && args[0].equalsIgnoreCase("reload")) {
             plugin.reloadConfig();
             return true;
