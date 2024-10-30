@@ -1,4 +1,9 @@
 # User-specific stuff
+.idea/
+.gradle/8.8/*
+build/
+
+=======
 .idea
 server
 
@@ -9,6 +14,7 @@ server
 # IntelliJ
 out/
 
+=======
 # Maven
 target/
 pom.xml.tag
@@ -132,4 +138,9 @@ buildNumber.properties
 .flattened-pom.xml
 
 # Common working directory
+run/
+.gradle/8.8/executionHistory/executionHistory.bin
+*.lock
+*.bin
+=======
 run/

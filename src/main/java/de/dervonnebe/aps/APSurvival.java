@@ -41,7 +41,6 @@ public final class APSurvival extends JavaPlugin {
     DatabaseSetup databaseSetup;
 
     LanguageManager languageManager;
-    private DynamicCommandManager dynamicCommandManager;
 
     @Override
     public void onEnable() {
@@ -57,13 +56,6 @@ public final class APSurvival extends JavaPlugin {
         dataManager = new PersistentDataManager(this);
         tpa = new TPA(this);
         databaseManager = new DatabaseManager(this);
-
-
-        dynamicCommandManager = new DynamicCommandManager(this);
-
-        getCommand("addCommand").setExecutor(new AddCommandExecutor(dynamicCommandManager));
-        getCommand("addCommand").setTabCompleter(new AddCommandTabCompleter());
-
 
         loadServerLinks();
         setupDatabase(debug);
