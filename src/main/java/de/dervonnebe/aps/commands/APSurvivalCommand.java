@@ -4,14 +4,19 @@ import de.dervonnebe.aps.APSurvival;
 import de.dervonnebe.aps.utils.Messages;
 import de.dervonnebe.aps.utils.PersistentDataManager;
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -71,11 +76,6 @@ public class APSurvivalCommand implements CommandExecutor, TabCompleter {
         if (args.length == 1 && args[0].equalsIgnoreCase("reload")) {
             plugin.reloadConfig();
             plugin.loadServerLinks();
-            return true;
-        }
-
-        if (args.length == 1 && args[0].equalsIgnoreCase("reload")) {
-            plugin.reloadConfig();
             return true;
         }
 

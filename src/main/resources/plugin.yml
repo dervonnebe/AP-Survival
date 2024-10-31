@@ -144,6 +144,11 @@ commands:
             - alert
             - bc
 
+    invsee:
+        description: "Öffne das Inventar eines anderen Spielers."
+        usage: "/invsee <Spieler>"
+
+
 
 
 permissions:

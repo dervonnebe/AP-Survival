@@ -177,6 +177,10 @@ public final class APSurvival extends JavaPlugin {
         LanguageCommand languageCommand = new LanguageCommand(this);
         getCommand("language").setExecutor(languageCommand);
 
+        InvseeCommand invseeCommand = new InvseeCommand(this);
+        getCommand("invsee").setExecutor(invseeCommand);
+        getCommand("invsee").setTabCompleter(invseeCommand);
+
 
         log("Commands registered!");
     }
@@ -187,6 +191,7 @@ public final class APSurvival extends JavaPlugin {
         pm.registerEvents(new CommandPreProcessEvent(this), this);
         pm.registerEvents(new CommandTabCompleteEvent(), this);
         pm.registerEvents(new ServerLinksEvent(this), this);
+        pm.registerEvents(new InvseeEvent(this), this);
 
         if (configManager.getBoolean("spawn-fly.enabled")) {
             pm.registerEvents(SpawnFlyEvents.create(this), this);

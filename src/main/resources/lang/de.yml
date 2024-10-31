@@ -38,6 +38,12 @@ command:
     change-other: "§f§l%target%§7 wurde auf den Spielmodus §f§l%gamemode%§7 geändert."
     invalid-gamemode: "§cUngültiger Spielmodus! Bitte benutze einen gültigen Gamemode."
 
+  invsee:
+    usage: "§7Verwendung: /invsee <Spieler>"
+    player-not-found: "§cDer Spieler %target% wurde nicht gefunden oder ist offline."
+    success: "§7Du hast erfolgreich das Inventar von %target% geöffnet."
+
+
   msg:
     no-reply: "§7Du hast niemanden, an den du antworten kannst."
     cannot-receive: "&cDieser Spieler kann keine Nachrichten empfangen."
@@ -122,6 +128,12 @@ command:
     godmode-off:
       self: "§7God-Mode ist nun §cdeaktiviert§7."
       other: "§7God-Mode für §f§l%target%§7 ist nun §cdeaktiviert§7."
+    invsee:
+      target-not-found: "§cDer Spieler §f§l%target%§7 wurde nicht gefunden oder ist offline."
+      target-not-allowed: "§cDu darfst das Inventar von §f§l§7 nicht einsehen."
+      self: "§7Du kannst dein eigenes Inventar nicht einsehen."
+      success: "§7Du hast erfolgreich das Inventar von §f§l%target%§7 geöffnet."
+      title: "§7Inventar von §l%target%"
 
   reboot:
     invalid-time: "§cDie angegebene Zeit ist ungültig. Bitte geben Sie eine positive Zahl ein."
@@ -135,6 +147,13 @@ command:
     broadcast:
       income-alert: "§aAchtung Broadcast"
       sent: "§7Du hast folgende Broadcast nachricht an §f§l%language%§7 gesendet. Nachricht:§8 %message%"
+
+dictionary:
+  boots: "Stiefel"
+  leggings: "Hose"
+  chestplate: "Brustplatte"
+  helmet: "Helm"
+  offhand: "Offhand"
 
 spawn-fly:
   boost-info: "§7Drücke §f§l%key%§7 um dich zu Boosten."
