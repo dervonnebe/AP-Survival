@@ -8,18 +8,13 @@ version = '1.0'
 
 repositories {
     mavenCentral()
-    maven {
-        name = "papermc-repo"
-        url = "https://repo.papermc.io/repository/maven-public/"
-    }
-    maven {
-        name = "sonatype"
-        url = "https://oss.sonatype.org/content/groups/public/"
-    }
+    maven { url = 'https://repo.papermc.io/repository/maven-public/' }
+    maven { url = 'https://repo.extendedclip.com/content/repositories/placeholderapi/' }
 }
 
 dependencies {
-    compileOnly("io.papermc.paper:paper-api:1.21.1-R0.1-SNAPSHOT")
+    compileOnly 'io.papermc.paper:paper-api:1.21.1-R0.1-SNAPSHOT'
+    compileOnly 'me.clip:placeholderapi:2.11.5'
     compileOnly 'org.projectlombok:lombok:1.18.30'
     annotationProcessor 'org.projectlombok:lombok:1.18.30'
 }
@@ -52,18 +47,14 @@ processResources {
 }
 
 shadowJar {
-    shadowJar {
-        archiveBaseName.set("AP-Survival")       // Basisname des Shadow Jars
-        archiveVersion.set(version)                 // Versionsnummer
-        archiveClassifier.set("")                   // Leerer Classifier
-        manifest {
-            attributes(
-                    'Main-Class': 'de.dervonnebe.aps' // Pfad zur Hauptklasse
-            )
-        }
-    }
+    archiveBaseName.set("AP-Survival")
+    archiveClassifier.set("")
+    destinationDirectory = file('\\\\sshfs\\dev@192.168.2.65!22\\volumes\\da81d4d8-1709-433a-ac92-a25da63ba9c4\\plugins')
 }
 
-build {
-    dependsOn(shadowJar)
+tasks.named('build') {
+    dependsOn shadowJar
 }
+
+// Das normale JAR-Task deaktivieren, da wir nur das shadowJar verwenden wollen
+jar.enabled = false

@@ -126,6 +126,20 @@ command:
       income-alert: "§aAttention Broadcast"
       sent: "§7You have sent the following broadcast message to §f§l %language%. Message: %message%"
 
+  spawn:
+    teleported: "§7You have been teleported to spawn."
+    set: "§7The spawn has been set successfully."
+    not-set: "§7No spawn has been set yet. You were teleported to the world spawn."
+
+  warp:
+    teleported: "§7You have been teleported to §f§l%warp%§7."
+    set: "§7The warp §f§l%warp%§7 has been set successfully."
+    deleted: "§7The warp §f§l%warp%§7 has been deleted successfully."
+    list: "§7Available warps: §f%warps%"
+    not-found: "§cThe warp §f§l%warp%§c does not exist."
+    already-exists: "§cThe warp §f§l%warp%§c already exists."
+    no-warps: "§cNo warps have been set yet."
+
 database:
   connection:
     success: "Successfully connected to the database. §8[§7%type%§8]"
@@ -136,3 +150,24 @@ database:
     tables:
       success: "Successfully created tables in the database."
       error: "Error creating tables in the database: %error%"
+
+sit-lay:
+  sit:
+    disabled: "§7You have §cdisabled§7 sitting."
+    enabled: "§7You have §aenabled§7 sitting."
+    action: "§7You sat down."
+  lay:
+    disabled: "§7You have §cdisabled§7 laying."
+    enabled: "§7You have §aenabled§7 laying."
+    action: "§7You laid down."
+  toggle:
+    usage: "§cUsage: /sitlay <sit|lay> [on|off]"
+
+command:
+  aps:
+    config:
+      usage: "§cUsage: /aps config <reset>"
+      reset:
+        success: "§aConfig has been reset successfully!"
+        backup: "§7A backup has been created: §f%file%"
+        error: "§cError while resetting config: %error%"

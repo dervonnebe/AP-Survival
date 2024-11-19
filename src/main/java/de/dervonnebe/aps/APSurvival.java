@@ -8,7 +8,9 @@ import de.dervonnebe.aps.commands.tpa.*;
 import de.dervonnebe.aps.events.*;
 import de.dervonnebe.aps.setup.DatabaseSetup;
 import de.dervonnebe.aps.utils.*;
+import de.dervonnebe.aps.systems.SitLaySystem;
 import lombok.Getter;
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -43,6 +45,14 @@ public final class APSurvival extends JavaPlugin {
     LanguageManager languageManager;
     @Getter
     PluginManager pm;
+    @Getter
+    private LocationManager locationManager;
+    @Getter
+    private SitLaySystem sitLaySystem;
+    @Getter
+    private StatusManager statusManager;
+    @Getter
+    private ChatManager chatManager;
 
     @Override
     public void onEnable() {
@@ -69,6 +79,26 @@ public final class APSurvival extends JavaPlugin {
         registerCommands();
         registerEvents();
         registerBStats();
+        locationManager = new LocationManager(this);
+
+        if (configManager.getBoolean("sit-and-lay.enabled")) {
+            sitLaySystem = new SitLaySystem(this);
+            log("Sit/Lay System aktiviert!");
+        }
+
+        if (configManager.getBoolean("status.enabled")) {
+            statusManager = new StatusManager(this);
+            log("Status System aktiviert!");
+        }
+
+        // PlaceholderAPI Support
+        if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
+            new StatusPlaceholder(this).register();
+            log("PlaceholderAPI Support aktiviert!");
+        }
+
+        chatManager = new ChatManager(this);
+
         log("APSurvival started! in §8" + (System.currentTimeMillis() - now) + "ms");
     }
 
@@ -77,6 +107,9 @@ public final class APSurvival extends JavaPlugin {
         long now = System.currentTimeMillis();
         log("Stopping APSurvival...");
         databaseManager.closeConnection();
+        if (sitLaySystem != null) {
+            sitLaySystem.cleanup();
+        }
         log("APSurvival stopped! in §8" + (System.currentTimeMillis() - now) + "ms","BYE");
     }
 
@@ -181,6 +214,31 @@ public final class APSurvival extends JavaPlugin {
         getCommand("invsee").setExecutor(invseeCommand);
         getCommand("invsee").setTabCompleter(invseeCommand);
 
+        SpawnCommand spawnCommand = new SpawnCommand(this);
+        getCommand("spawn").setExecutor(spawnCommand);
+        getCommand("spawn").setTabCompleter(spawnCommand);
+
+        WarpCommand warpCommand = new WarpCommand(this);
+        getCommand("warp").setExecutor(warpCommand);
+        getCommand("warp").setTabCompleter(warpCommand);
+
+        SitLayCommand sitLayCommand = new SitLayCommand(this);
+        getCommand("sitlay").setExecutor(sitLayCommand);
+        getCommand("sitlay").setTabCompleter(sitLayCommand);
+
+        SitCommand sitCommand = new SitCommand(this);
+        getCommand("sit").setExecutor(sitCommand);
+
+        LayCommand layCommand = new LayCommand(this);
+        getCommand("lay").setExecutor(layCommand);
+
+        StatusCommand statusCommand = new StatusCommand(this);
+        getCommand("status").setExecutor(statusCommand);
+        getCommand("status").setTabCompleter(statusCommand);
+
+        ChatCommand chatCommand = new ChatCommand(this);
+        getCommand("chat").setExecutor(chatCommand);
+        getCommand("chat").setTabCompleter(chatCommand);
 
         log("Commands registered!");
     }
@@ -259,5 +317,9 @@ public final class APSurvival extends JavaPlugin {
         String logType = (type != null && type.length > 0 && !type[0].isEmpty()) ? type[0] : "INFO";
         String messageColor = logType.equalsIgnoreCase("ERROR") ? "§4" : logType.equalsIgnoreCase("WARNING") ? "§6" : "§f";
         getServer().getConsoleSender().sendMessage(getPrefix() + "[" + logType + "] " + messageColor + message);
+    }
+
+    public void updatePrefix() {
+        this.prefix = configManager.getString("prefix");
     }
 }

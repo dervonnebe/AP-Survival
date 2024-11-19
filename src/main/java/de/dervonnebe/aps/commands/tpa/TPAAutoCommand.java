@@ -32,7 +32,7 @@ public class TPAAutoCommand implements CommandExecutor {
             return true;
         }
 
-        if (plugin.getDataManager().getBooleanData(player, "tpauto")) {
+        if (plugin.getDataManager().getBooleanData(player, "tpauto", false)) {
             plugin.getDataManager().setBooleanData(player, "tpauto", false);
             player.sendMessage(plugin.getPrefix() + msg.getPlayerMessage(player, "command.tpauto.disabled"));
             return true;

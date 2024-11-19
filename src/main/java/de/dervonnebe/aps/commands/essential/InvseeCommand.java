@@ -72,7 +72,7 @@ public class InvseeCommand implements CommandExecutor, TabCompleter {
     }
 
     private void setupArmorAndOffhandSlots(Inventory gui, Player target) {
-        gui.setItem(51, createArmorItem(target.getInventory().getBoots(), , target.getDisplayName()));
+        gui.setItem(51, createArmorItem(target.getInventory().getBoots(),"Boots" , target.getDisplayName()));
         gui.setItem(50, createArmorItem(target.getInventory().getLeggings(), "Leggings", target.getDisplayName()));
         gui.setItem(48, createArmorItem(target.getInventory().getChestplate(), "Chestplate", target.getDisplayName()));
         gui.setItem(47, createArmorItem(target.getInventory().getHelmet(), "Helmet", target.getDisplayName()));

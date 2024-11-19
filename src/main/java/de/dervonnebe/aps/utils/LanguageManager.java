@@ -6,18 +6,25 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
+import java.util.ArrayList;
+import java.util.List;
 
 public class LanguageManager {
-    private APSurvival plugin;
-    private String[] languages;
+    private final APSurvival plugin;
+    private List<String> languages;
 
-    public LanguageManager(APSurvival plugin, Boolean reset, String[] languages) {
+    public LanguageManager(APSurvival plugin, Boolean reset, String[] languageFiles) {
         this.plugin = plugin;
-        this.languages = languages;
-        if (languages.length == 0) {
+        this.languages = new ArrayList<>();
+        for (String lang : languageFiles) {
+            languages.add(lang);
+        }
+        
+        if (languages.isEmpty()) {
             plugin.log("No languages defined in the LanguageManager", "ERROR");
             return;
         }
+        
         if (reset) {
             deleteServerLangFiles();
         }
@@ -61,5 +68,10 @@ public class LanguageManager {
                 }
             }
         }
+    }
+
+    public void reloadLanguages() {
+        deleteServerLangFiles();
+        ensureLanguagesExist();
     }
 }

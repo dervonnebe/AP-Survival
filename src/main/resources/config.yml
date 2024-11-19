@@ -81,3 +81,53 @@ custom-commands:
 bstats: true # If you want to support the plugin, set this to false
 # Do not change the following settings unless you know what you are doing
 file-version: 1.0-BETA
+
+# Sit and Lay System Configuration
+sit-and-lay:
+  enabled: true
+  # Permissions
+  require-permission: false
+  # Animations
+  sit:
+    enabled: true
+    height-offset: 0.5
+    # Welche Blöcke zum Sitzen verwendet werden können
+    blocks:
+      enabled: true
+      list:
+        - STAIRS
+        - SLAB
+        - CARPET
+  lay:
+    enabled: true
+    height-offset: 0.3
+    # Maximale Zeit in Sekunden, die man liegen kann (0 = unbegrenzt)
+    max-duration: 0
+
+status:
+  enabled: true
+  # Standardstatus die in der Tab-Completion angezeigt werden
+  defaults:
+    - "&aOnline"
+    - "&cBeschäftigt"
+    - "&6AFK"
+    - "&bZockt"
+    - "&dStreamt"
+    - "&eAm Bauen"
+  # Format für Status in Tab und Chat
+  format:
+    tab: "&7[%status%&7]"
+    chat: "&7[%status%&7] "
+
+chat:
+  enabled: true
+  format: "&7[%time%] %status%§7%player%&8: &7%message%"
+  # Farbcode-Einstellungen
+  colors:
+    all-players: false  # Wenn true, können alle Spieler Farbcodes nutzen
+  ping:
+    enabled: true
+    format: "&f&l@%player%&7"
+    sound: ENTITY_EXPERIENCE_ORB_PICKUP
+    volume: 1.0
+    pitch: 1.0

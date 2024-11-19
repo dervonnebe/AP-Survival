@@ -53,7 +53,7 @@ public class TPACommand implements CommandExecutor {
                 return true;
             }
 
-            if (plugin.getDataManager().getBooleanData(target, "tpauto")) {
+            if (plugin.getDataManager().getBooleanData(target, "tpauto", false)) {
                 player.sendMessage(plugin.getPrefix() + msg.getPlayerMessage(player, "command.tpauto.sucsess"));
                 player.teleport(target);
                 return true;

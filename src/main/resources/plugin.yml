@@ -1,10 +1,13 @@
 name: AP-Survival
 version: '1.0'
 main: de.dervonnebe.aps.APSurvival
-api-version: '1.21'
-author: dervonnebe
-description: Watch our Website
+api-version: '1.20'
+authors: [DerVonNebe]
+description: Ein Plugin für den AP-Survival Server
 website: https://dervonnebe.de/ap/survival
+
+softdepend: [PlaceholderAPI]
+
 commands:
     addCommand:
 
@@ -147,6 +150,21 @@ commands:
     invsee:
         description: "Öffne das Inventar eines anderen Spielers."
         usage: "/invsee <Spieler>"
+
+    sitlay:
+
+    sit:
+
+    lay:
+
+    status:
+
+    spawn:
+
+    warp:
+
+    chat:
+
 
 
 

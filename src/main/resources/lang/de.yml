@@ -97,6 +97,20 @@ command:
     invalid: "§cUngültige Sprache! Bitte benutze eine gültige Sprache."
     current: "§7Deine aktuelle Sprache ist §f§l%language%§7."
 
+  spawn:
+    teleported: "§7Du wurdest zum Spawn teleportiert."
+    set: "§7Der Spawn wurde erfolgreich gesetzt."
+    not-set: "§7Es wurde noch kein Spawn gesetzt. Du wurdest zum Weltspawn teleportiert."
+
+  warp:
+    teleported: "§7Du wurdest zu §f§l%warp%§7 teleportiert."
+    set: "§7Der Warp §f§l%warp%§7 wurde erfolgreich gesetzt."
+    deleted: "§7Der Warp §f§l%warp%§7 wurde erfolgreich gelöscht."
+    list: "§7Verfügbare Warps: §f%warps%"
+    not-found: "§cDer Warp §f§l%warp%§c existiert nicht."
+    already-exists: "§cDer Warp §f§l%warp%§c existiert bereits."
+    no-warps: "§cEs wurden noch keine Warps gesetzt."
+
   environment:
     day: "§7Die Zeit wurde auf §f§lTag§7 gesetzt."
     night: "§7Die Zeit wurde auf §f§lNacht§7 gesetzt."
@@ -148,6 +162,38 @@ command:
       income-alert: "§aAchtung Broadcast"
       sent: "§7Du hast folgende Broadcast nachricht an §f§l%language%§7 gesendet. Nachricht:§8 %message%"
 
+  sit-lay:
+    sit:
+      disabled: "§7Du hast das Sitzen §cdeaktiviert§7."
+      enabled: "§7Du hast das Sitzen §aaktiviert§7."
+      action: "§7Du hast dich hingesetzt."
+    lay:
+      disabled: "§7Du hast das Liegen §cdeaktiviert§7."
+      enabled: "§7Du hast das Liegen §aaktiviert§7."
+      action: "§7Du hast dich hingelegt."
+    toggle:
+      usage: "§cVerwendung: /sitlay <sit|lay> [on|off]"
+
+  status:
+    set: "§7Dein Status wurde zu %status% §7geändert."
+    reset: "§7Dein Status wurde zurückgesetzt."
+    current: "§7Dein aktueller Status: %status%"
+    usage: "§cVerwendung: /status <status|reset>"
+
+  chat:
+    usage: "§cVerwendung: /chat ping <on|off>"
+    ping:
+      enabled: "§7Chat-Pings wurden §aaktiviert§7."
+      disabled: "§7Chat-Pings wurden §cdeaktiviert§7."
+
+  aps:
+    config:
+      usage: "§cVerwendung: /aps config <reset>"
+      reset:
+        success: "§aConfig wurde erfolgreich zurückgesetzt!"
+        backup: "§7Ein Backup wurde erstellt: §f%file%"
+        error: "§cFehler beim Zurücksetzen der Config: %error%"
+
 dictionary:
   boots: "Stiefel"
   leggings: "Hose"
@@ -168,3 +214,17 @@ database:
     tables:
       success: "§7Die Tabellen wurden erfolgreich erstellt."
       error: "§cFehler beim Erstellen der Tabellen:§f %error%"
+
+sit-lay:
+  sit:
+    disabled: "§7Du hast das Sitzen §cdeaktiviert§7."
+    enabled: "§7Du hast das Sitzen §aaktiviert§7."
+    action: "§7Du hast dich hingesetzt."
+  lay:
+    disabled: "§7Du hast das Liegen §cdeaktiviert§7."
+    enabled: "§7Du hast das Liegen §aaktiviert§7."
+    action: "§7Du hast dich hingelegt."
+  toggle:
+    usage: "§cVerwendung: /sitlay <sit|lay> [on|off]"
+
+
