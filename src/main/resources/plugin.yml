@@ -170,6 +170,11 @@ commands:
         usage: "/chatclear [-l <sprache>] [-t <sekunden>]"
         aliases: [cc]
 
+    help:
+        description: "Zeigt das Hilfe-Menü an"
+        usage: "/help [kategorie] [befehl]"
+        aliases: ["?"]
+
 
 
 

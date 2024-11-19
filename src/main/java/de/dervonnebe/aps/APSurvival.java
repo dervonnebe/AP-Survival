@@ -102,6 +102,10 @@ public final class APSurvival extends JavaPlugin {
         getCommand("chatclear").setExecutor(new ChatClearCommand(this));
         getCommand("chatclear").setTabCompleter(new ChatClearCommand(this));
 
+        HelpCommand helpCommand = new HelpCommand(this);
+        getCommand("help").setExecutor(helpCommand);
+        getCommand("help").setTabCompleter(helpCommand);
+
         log("APSurvival started! in §8" + (System.currentTimeMillis() - now) + "ms");
     }
 
