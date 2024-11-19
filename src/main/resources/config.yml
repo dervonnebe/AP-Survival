@@ -121,7 +121,7 @@ status:
 
 chat:
   enabled: true
-  format: "&7[%time%] %status%§7%player%&8: &7%message%"
+  format: "&7[%time%] %status%&f<%player%> %message%"
   # Farbcode-Einstellungen
   colors:
     all-players: false  # Wenn true, können alle Spieler Farbcodes nutzen
