@@ -227,4 +227,8 @@ sit-lay:
   toggle:
     usage: "§cVerwendung: /sitlay <sit|lay> [on|off]"
 
+chatclear:
+  cleared: "§7Der Chat wurde von §f§l%player%§7 geleert."
+  scheduled: "§7Der Chat wird in §f§l%seconds%§7 Sekunden geleert."
+
 

@@ -171,3 +171,7 @@ command:
         success: "§aConfig has been reset successfully!"
         backup: "§7A backup has been created: §f%file%"
         error: "§cError while resetting config: %error%"
+
+  chatclear:
+    cleared: "§7Chat has been cleared by §f§l%player%§7."
+    scheduled: "§7Chat will be cleared in §f§l%seconds%§7 seconds."

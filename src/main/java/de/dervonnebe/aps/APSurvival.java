@@ -99,6 +99,9 @@ public final class APSurvival extends JavaPlugin {
 
         chatManager = new ChatManager(this);
 
+        getCommand("chatclear").setExecutor(new ChatClearCommand(this));
+        getCommand("chatclear").setTabCompleter(new ChatClearCommand(this));
+
         log("APSurvival started! in §8" + (System.currentTimeMillis() - now) + "ms");
     }
 
